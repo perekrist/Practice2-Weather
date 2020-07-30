@@ -12,9 +12,7 @@ import MapKit
 class MapViewModel {
     
     var selectedCity: String? = nil
-    var selectedCoordinate: CLLocationCoordinate2D? = nil
-
-    
+    var selectedCoordinate: CLLocationCoordinate2D? = nil    
     
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
         cityFromCoordinates(coordinate: coordinate) { result in

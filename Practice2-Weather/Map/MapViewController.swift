@@ -15,6 +15,7 @@ class MapViewController: UIViewController {
     private let viewModel: MapViewModel
     
     private var mapView: MKMapView?
+    var timer: Timer?
     
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
@@ -95,6 +96,9 @@ extension MapViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else { return }
         guard !text.isEmpty else { return }
         
-        self.viewModel.geocodeCoordinateFromCity(city: text)
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+            self.viewModel.geocodeCoordinateFromCity(city: text)
+        })
     }
 }
