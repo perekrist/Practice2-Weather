@@ -60,6 +60,7 @@ extension MapViewController {
     }
     
     private func setupMapView() {
+        mapView!.setCenter(CLLocationCoordinate2D(latitude: 45.16447, longitude: 9.43332), animated: true)
         mapView!.snp.makeConstraints { (make) in
             make.top.equalTo(view.snp.topMargin)
             make.trailing.equalTo(view.snp.trailing)
