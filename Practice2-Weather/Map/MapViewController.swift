@@ -55,6 +55,7 @@ extension MapViewController {
         navigationItem.title = "Global Weather"
         
         let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
     }
     
@@ -89,4 +90,11 @@ extension MapViewController: UIGestureRecognizerDelegate {
     }
 }
 
-
+extension MapViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        guard !text.isEmpty else { return }
+        
+        self.viewModel.geocodeCoordinateFromCity(city: text)
+    }
+}
