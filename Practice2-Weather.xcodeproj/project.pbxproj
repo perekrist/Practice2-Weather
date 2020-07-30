@@ -12,6 +12,9 @@
 		CA6DFC1C24D2AAC2001F65B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA6DFC1A24D2AAC2001F65B7 /* LaunchScreen.storyboard */; };
 		CA6DFC2424D2B258001F65B7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC2324D2B258001F65B7 /* AppCoordinator.swift */; };
 		CA6DFC2624D2B271001F65B7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC2524D2B271001F65B7 /* Coordinator.swift */; };
+		CA6DFC2824D2B3BE001F65B7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC2724D2B3BE001F65B7 /* MapViewController.swift */; };
+		CA6DFC2A24D2B3D0001F65B7 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC2924D2B3D0001F65B7 /* MapViewModel.swift */; };
+		CA6DFC2D24D2B414001F65B7 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC2C24D2B414001F65B7 /* MapCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		CA6DFC1D24D2AAC2001F65B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA6DFC2324D2B258001F65B7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		CA6DFC2524D2B271001F65B7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		CA6DFC2724D2B3BE001F65B7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CA6DFC2924D2B3D0001F65B7 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		CA6DFC2C24D2B414001F65B7 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 		CA6DFC0E24D2AABC001F65B7 /* Practice2-Weather */ = {
 			isa = PBXGroup;
 			children = (
+				CA6DFC2B24D2B3E3001F65B7 /* Map */,
 				CA6DFC1824D2AAC2001F65B7 /* Assets.xcassets */,
 				CA6DFC1A24D2AAC2001F65B7 /* LaunchScreen.storyboard */,
 				CA6DFC1D24D2AAC2001F65B7 /* Info.plist */,
@@ -62,6 +69,16 @@
 				CA6DFC2324D2B258001F65B7 /* AppCoordinator.swift */,
 			);
 			path = "Practice2-Weather";
+			sourceTree = "<group>";
+		};
+		CA6DFC2B24D2B3E3001F65B7 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				CA6DFC2724D2B3BE001F65B7 /* MapViewController.swift */,
+				CA6DFC2924D2B3D0001F65B7 /* MapViewModel.swift */,
+				CA6DFC2C24D2B414001F65B7 /* MapCoordinator.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +152,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA6DFC2424D2B258001F65B7 /* AppCoordinator.swift in Sources */,
+				CA6DFC2A24D2B3D0001F65B7 /* MapViewModel.swift in Sources */,
 				CA6DFC2624D2B271001F65B7 /* Coordinator.swift in Sources */,
+				CA6DFC2D24D2B414001F65B7 /* MapCoordinator.swift in Sources */,
 				CA6DFC1024D2AABC001F65B7 /* AppDelegate.swift in Sources */,
+				CA6DFC2824D2B3BE001F65B7 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
