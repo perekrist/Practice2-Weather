@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import MapKit
+import SnapKit
 
 class MapViewController: UIViewController {
     
     private let viewModel: MapViewModel
+    
+    private var mapView: MKMapView?
     
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
@@ -41,7 +45,10 @@ extension MapViewController {
     
     private func initialSetup() {
         view.backgroundColor = .white
+        mapView = MKMapView()
+        view.addSubview(mapView!)
         setupNavigationBar()
+        setupMapView()
     }
     
     private func setupNavigationBar() {
@@ -50,6 +57,15 @@ extension MapViewController {
         
         let searchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = searchController
+    }
+    
+    private func setupMapView() {
+        mapView!.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.topMargin)
+            make.trailing.equalTo(view.snp.trailing)
+            make.leading.equalTo(view.snp.leading)
+            make.bottom.equalTo(view.snp.bottom)
+        }
     }
     
     
