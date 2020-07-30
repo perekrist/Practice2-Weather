@@ -34,20 +34,19 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .never
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-
+    
 }
 
 extension MapViewController {
     
     private func initialSetup() {
         view.backgroundColor = .white
-        mapView = MKMapView()
-        view.addSubview(mapView!)
         setupNavigationBar()
+        configureMapView()
         setupMapView()
     }
     
@@ -57,6 +56,15 @@ extension MapViewController {
         
         let searchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = searchController
+    }
+    
+    private func configureMapView() {
+        mapView = MKMapView()
+        view.addSubview(mapView!)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapRecognizer))
+        gestureRecognizer.delegate = self
+        mapView!.addGestureRecognizer(gestureRecognizer)
     }
     
     private func setupMapView() {
@@ -69,7 +77,16 @@ extension MapViewController {
         }
     }
     
-    
+}
+
+extension MapViewController: UIGestureRecognizerDelegate {
+    @objc func mapTapRecognizer(sender: UIGestureRecognizer) {
+        
+        let location = sender.location(in: mapView)
+        let coordinate = mapView!.convert(location, toCoordinateFrom: mapView)
+        
+        viewModel.geocodeCityFromCoordinate(coordinate: coordinate)
+    }
 }
 
 

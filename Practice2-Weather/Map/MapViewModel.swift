@@ -7,7 +7,36 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewModel {
     
+    var selectedCity: String? = nil
+    
+    func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
+        cityFromCoordinates(coordinate: coordinate) { result in
+            switch result {
+            case .success(let placemark):
+                self.selectedCity = placemark?.locality
+                print(self.selectedCity)
+            case .failure(let error):
+                print(error)
+                self.selectedCity = nil
+            }
+        }
+    }
+    
+}
+
+extension MapViewModel {
+    func cityFromCoordinates(coordinate: CLLocationCoordinate2D, completion: @escaping (Result<CLPlacemark?, Error>) -> Void) {
+        CLGeocoder()
+            .reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { placemarks, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                completion(.success(placemarks?.first))
+        }
+    }
 }
