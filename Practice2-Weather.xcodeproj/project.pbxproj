@@ -18,6 +18,7 @@
 		CA6DFC2D24D2B414001F65B7 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC2C24D2B414001F65B7 /* MapCoordinator.swift */; };
 		CA6DFC3024D2EB84001F65B7 /* MapPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC2F24D2EB84001F65B7 /* MapPickView.swift */; };
 		CA6DFC3224D2EBAC001F65B7 /* MapPickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC3124D2EBAC001F65B7 /* MapPickViewModel.swift */; };
+		CA6DFC3524D3E763001F65B7 /* CoordinateToDMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		CA6DFC2C24D2B414001F65B7 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		CA6DFC2F24D2EB84001F65B7 /* MapPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickView.swift; sourceTree = "<group>"; };
 		CA6DFC3124D2EBAC001F65B7 /* MapPickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickViewModel.swift; sourceTree = "<group>"; };
+		CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateToDMS.swift; sourceTree = "<group>"; };
 		FFED2C848DF916DFC899D400 /* Pods-Practice2-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practice2-Weather.release.xcconfig"; path = "Target Support Files/Pods-Practice2-Weather/Pods-Practice2-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +81,7 @@
 		CA6DFC0E24D2AABC001F65B7 /* Practice2-Weather */ = {
 			isa = PBXGroup;
 			children = (
+				CA6DFC3324D3E6ED001F65B7 /* Extensions */,
 				CA6DFC2B24D2B3E3001F65B7 /* Map */,
 				CA6DFC1824D2AAC2001F65B7 /* Assets.xcassets */,
 				CA6DFC1A24D2AAC2001F65B7 /* LaunchScreen.storyboard */,
@@ -108,6 +111,14 @@
 				CA6DFC3124D2EBAC001F65B7 /* MapPickViewModel.swift */,
 			);
 			path = MapPick;
+			sourceTree = "<group>";
+		};
+		CA6DFC3324D3E6ED001F65B7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		DE0E318F38E13398FFF40586 /* Pods */ = {
@@ -233,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA6DFC3524D3E763001F65B7 /* CoordinateToDMS.swift in Sources */,
 				CA6DFC2424D2B258001F65B7 /* AppCoordinator.swift in Sources */,
 				CA6DFC2A24D2B3D0001F65B7 /* MapViewModel.swift in Sources */,
 				CA6DFC3224D2EBAC001F65B7 /* MapPickViewModel.swift in Sources */,

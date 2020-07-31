@@ -62,7 +62,7 @@ extension MapViewController {
                 self?.closeMapPickView()
                 return
             }
-            self?.mapPickView?.coordinateLabel.text = "\(String((self?.viewModel.selectedCoordinate?.latitude.description) ?? "-")) \(String( (self?.viewModel.selectedCoordinate?.longitude.description) ?? "-"))"
+            self?.mapPickView?.coordinateLabel.text = self?.viewModel.selectedCoordinate?.dms
             self?.mapPickView?.cityLabel.text = cityName
             
             guard let isOpened = self?.mapPickView?.viewModel?.isOpened else { return }
