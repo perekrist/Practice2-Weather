@@ -12,14 +12,17 @@ import MapKit
 class MapViewModel {
     
     var selectedCity: String? = nil
-    var selectedCoordinate: CLLocationCoordinate2D? = nil    
+    var selectedCoordinate: CLLocationCoordinate2D? = nil
+        
+    var onDidUpdate: (() -> Void)?
     
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
         cityFromCoordinates(coordinate: coordinate) { result in
             switch result {
             case .success(let placemark):
                 self.selectedCity = placemark?.locality
-                print(String(self.selectedCity!))
+                self.selectedCoordinate = placemark?.location?.coordinate
+                self.onDidUpdate?()
             case .failure(let error):
                 print(error)
                 self.selectedCity = nil
@@ -33,7 +36,7 @@ class MapViewModel {
             case .success(let placemark):
                 self.selectedCity = placemark?.locality
                 self.selectedCoordinate = placemark?.location?.coordinate
-                print(String(self.selectedCity ?? "hi"))
+                self.onDidUpdate?()
             case .failure(let error):
                 print(error)
                 self.selectedCoordinate = nil
@@ -63,5 +66,15 @@ extension MapViewModel {
                 }
                 completion(.success(placemarks?.first))
         }
+    }
+}
+
+extension MapViewModel: MapPickViewModelDelegate {
+    func mapPickViewModelDidTapClose(_ viewModel: MapPickViewModel) {
+        viewModel.isOpened = false
+    }
+    
+    func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
+        
     }
 }

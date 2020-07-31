@@ -13,12 +13,13 @@ class MapPickView: UIView {
     
     var viewModel: MapPickViewModel?
     
-    private lazy var cityLabel = UILabel()
-    private lazy var coordinateLabel = UILabel()
+    lazy var cityLabel = UILabel()
+    lazy var coordinateLabel = UILabel()
     private lazy var closeButton = UIButton(type: .system)
     private lazy var showWeatherButton = UIButton(type: .system)
     
     override func didMoveToSuperview() {
+        self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setupLabels()
         setupButtons()
         setupLayout()
@@ -37,30 +38,37 @@ extension MapPickView {
     }
     
     private func setupLayout() {
+        self.addSubview(cityLabel)
         cityLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.snp.top).offset(16)
             make.leading.equalTo(self.snp.leading).offset(16)
         }
         
+        self.addSubview(closeButton)
         closeButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.snp.top).offset(20)
-            make.trailing.equalTo(self.snp.trailing).offset(20)
+            make.trailing.equalTo(self.snp.trailing).offset(-20)
             make.width.height.equalTo(12)
         }
         
+        self.addSubview(coordinateLabel)
         coordinateLabel.snp.makeConstraints { (make) in
             make.top.equalTo(cityLabel.snp.bottom).offset(2)
             make.leading.equalTo(self.snp.leading).offset(16)
         }
         
+        self.addSubview(showWeatherButton)
         showWeatherButton.snp.makeConstraints { (make) in
             make.top.equalTo(coordinateLabel.snp.bottom).offset(37)
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.bottom.equalTo(self.snp.bottom).offset(13)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.bottom.equalTo(self.snp.bottom).offset(-13)
+            make.height.equalTo(44)
         }
-        
-        self.layer.cornerRadius = 5
-        self.layer.shadowRadius = 5
+    
+        self.layer.cornerRadius = 10
+        self.layer.shadowRadius = 50
+        self.layer.masksToBounds = true
     }
     
     private func setupLabels() {
@@ -78,18 +86,18 @@ extension MapPickView {
         
         showWeatherButton.setTitle("Show Weather", for: .normal)
         showWeatherButton.tintColor = #colorLiteral(red: 0.1564054489, green: 0.5728738904, blue: 0.9122014046, alpha: 1)
-        showWeatherButton.titleLabel?.font = closeButton.titleLabel?.font.withSize(16)
-        showWeatherButton.layer.cornerRadius = 5
+        showWeatherButton.titleLabel?.font = showWeatherButton.titleLabel?.font.withSize(16)
+        showWeatherButton.layer.cornerRadius = 20
         showWeatherButton.layer.borderWidth = 1
         showWeatherButton.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.5647058824, blue: 0.8862745098, alpha: 1)
         showWeatherButton.addTarget(self, action: #selector(showWeather), for: .touchUpInside)
     }
     
     @objc private func closeMapPickView() {
-        
+        print("closeMapPickView")
     }
     
     @objc private func showWeather() {
-        
+        print("showWeather")
     }
 }

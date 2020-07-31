@@ -15,6 +15,8 @@ class MapViewController: UIViewController {
     private let viewModel: MapViewModel
     
     private var mapView: MKMapView?
+    private var mapPickView: MapPickView?
+    
     var timer: Timer?
     
     init(viewModel: MapViewModel) {
@@ -46,9 +48,30 @@ extension MapViewController {
     
     private func initialSetup() {
         view.backgroundColor = .white
+        bindToViewModel()
         setupNavigationBar()
         configureMapView()
         setupMapView()
+        configureMapPickView()
+        setupMapPickView(bottomConstraint: 170)
+    }
+    
+    private func bindToViewModel() {
+        viewModel.onDidUpdate = { [weak self] in
+            guard let cityName = self?.viewModel.selectedCity else {
+                self?.closeMapPickView()
+                return
+            }
+            self?.mapPickView?.coordinateLabel.text = "\(String((self?.viewModel.selectedCoordinate?.latitude.description) ?? "-")) \(String( (self?.viewModel.selectedCoordinate?.longitude.description) ?? "-"))"
+            self?.mapPickView?.cityLabel.text = cityName
+            
+            guard let isOpened = self?.mapPickView?.viewModel?.isOpened else { return }
+            if isOpened {
+                self?.closeMapPickView()
+            } else {
+                self?.showMapPickView()
+            }
+        }
     }
     
     private func setupNavigationBar() {
@@ -67,15 +90,31 @@ extension MapViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapRecognizer))
         gestureRecognizer.delegate = self
         mapView!.addGestureRecognizer(gestureRecognizer)
+        mapView!.setCenter(CLLocationCoordinate2D(latitude: 45.16447, longitude: 9.43332), animated: true)
+        mapView!.mapType = .mutedStandard
     }
     
     private func setupMapView() {
-        mapView!.setCenter(CLLocationCoordinate2D(latitude: 45.16447, longitude: 9.43332), animated: true)
         mapView!.snp.makeConstraints { (make) in
             make.top.equalTo(view.snp.topMargin)
             make.trailing.equalTo(view.snp.trailing)
             make.leading.equalTo(view.snp.leading)
             make.bottom.equalTo(view.snp.bottom)
+        }
+    }
+    
+    private func configureMapPickView() {
+        mapPickView = MapPickView()
+        let mapPickViewModel = MapPickViewModel(delegate: viewModel)
+        mapPickView!.setup(with: mapPickViewModel)
+        view.addSubview(mapPickView!)
+    }
+    
+    private func setupMapPickView(bottomConstraint: Int) {
+        mapPickView?.snp.makeConstraints { (make) in
+            make.trailing.equalTo(view.snp.trailing).offset(-16)
+            make.leading.equalTo(view.snp.leading).offset(16)
+            make.bottom.equalTo(view.snp.bottom).offset(bottomConstraint)
         }
     }
     
@@ -100,5 +139,21 @@ extension MapViewController: UISearchResultsUpdating {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             self.viewModel.geocodeCoordinateFromCity(city: text)
         })
+    }
+}
+
+extension MapViewController {
+    private func showMapPickView() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.setupMapPickView(bottomConstraint: -16)
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func closeMapPickView() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.setupMapPickView(bottomConstraint: 170)
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
