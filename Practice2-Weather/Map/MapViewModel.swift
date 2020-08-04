@@ -13,7 +13,7 @@ class MapViewModel {
     
     var selectedCity: String? = nil
     var selectedCoordinate: CLLocationCoordinate2D? = nil
-        
+    
     var onDidUpdate: (() -> Void)?
     
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
@@ -72,9 +72,11 @@ extension MapViewModel {
 extension MapViewModel: MapPickViewModelDelegate {
     func mapPickViewModelDidTapClose(_ viewModel: MapPickViewModel) {
         viewModel.isOpened = false
+        self.onDidUpdate?()
     }
     
     func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
-        
+        viewModel.isOpened = false
+        self.onDidUpdate?()
     }
 }

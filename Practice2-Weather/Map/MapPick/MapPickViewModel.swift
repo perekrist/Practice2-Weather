@@ -29,7 +29,7 @@ class MapPickViewModel {
         delegate?.mapPickViewModelDidTapClose(self)
     }
     
-    func onShowWeather() {
+    func onShowWeatherButton() {
         delegate?.mapPickViewModellDidTapShowWeather(self)
     }
 }

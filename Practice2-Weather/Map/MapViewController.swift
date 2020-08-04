@@ -53,7 +53,6 @@ extension MapViewController {
         configureMapView()
         setupMapView()
         configureMapPickView()
-        setupMapPickView(bottomConstraint: 170)
     }
     
     private func bindToViewModel() {

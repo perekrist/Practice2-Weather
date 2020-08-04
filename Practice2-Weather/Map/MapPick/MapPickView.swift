@@ -67,8 +67,11 @@ extension MapPickView {
         }
     
         self.layer.cornerRadius = 10
-        self.layer.shadowRadius = 50
-        self.layer.masksToBounds = true
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.layer.shadowRadius = 16.0
+        self.layer.shadowOpacity = 0.310066
+        self.layer.masksToBounds = false
     }
     
     private func setupLabels() {
@@ -94,10 +97,10 @@ extension MapPickView {
     }
     
     @objc private func closeMapPickView() {
-        print("closeMapPickView")
+        self.viewModel?.onCloseButton()
     }
     
     @objc private func showWeather() {
-        print("showWeather")
+        self.viewModel?.onShowWeatherButton()
     }
 }
