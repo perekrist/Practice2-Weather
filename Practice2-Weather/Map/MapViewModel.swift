@@ -15,7 +15,10 @@ class MapViewModel {
     var selectedCity: String? = nil
     var selectedCoordinate: CLLocationCoordinate2D? = nil
     
+    var error = ""
+    
     var onDidUpdate: (() -> Void)?
+    var onDidError: (() -> Void)?
     
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
         SVProgressHUD.show()
@@ -28,7 +31,8 @@ class MapViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                print(error)
+                print("errrror: " + error.localizedDescription)
+                self.error = error.localizedDescription
                 self.selectedCity = nil
             }
         }
@@ -45,7 +49,8 @@ class MapViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                print(error)
+                print("errrror: " + error.localizedDescription)
+                self.error = error.localizedDescription
                 self.selectedCoordinate = nil
             }
         }

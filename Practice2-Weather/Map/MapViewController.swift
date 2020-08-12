@@ -76,6 +76,11 @@ extension MapViewController {
                 self?.showMapPickView()
             }
         }
+        
+        viewModel.onDidError = { [weak self] in
+            guard let error = self?.viewModel.error else { return }
+            self?.showError(error)
+        }
     }
     
     private func setupNavigationBar() {
@@ -127,6 +132,13 @@ extension MapViewController {
             make.leading.equalTo(view.snp.leading).offset(16)
             make.bottom.equalTo(view.snp.bottom).offset(bottomConstraint)
         }
+    }
+    
+    private func showError(_ error: String) {
+        let alert = UIAlertController(title: "An error has occurred", message: error, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
