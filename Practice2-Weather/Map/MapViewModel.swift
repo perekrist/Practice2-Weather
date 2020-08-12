@@ -14,6 +14,7 @@ class MapViewModel {
     
     var selectedCity: String? = nil
     var selectedCoordinate: CLLocationCoordinate2D? = nil
+    var geoCodingService = GeoCodingService()
     
     var error = ""
     
@@ -22,7 +23,7 @@ class MapViewModel {
     
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
         SVProgressHUD.show()
-        cityFromCoordinates(coordinate: coordinate) { result in
+        geoCodingService.cityFromCoordinates(coordinate: coordinate) { result in
             switch result {
             case .success(let placemark):
                 SVProgressHUD.dismiss()
@@ -40,7 +41,7 @@ class MapViewModel {
     
     func geocodeCoordinateFromCity(city: String) {
         SVProgressHUD.show()
-        coordinatesFromCity(city: city) { result in
+        geoCodingService.coordinatesFromCity(city: city) { result in
             switch result {
             case .success(let placemark):
                 SVProgressHUD.dismiss()
@@ -53,30 +54,6 @@ class MapViewModel {
                 self.error = error.localizedDescription
                 self.selectedCoordinate = nil
             }
-        }
-    }
-}
-
-extension MapViewModel {
-    func cityFromCoordinates(coordinate: CLLocationCoordinate2D, completion: @escaping (Result<CLPlacemark?, Error>) -> Void) {
-        CLGeocoder()
-            .reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { placemarks, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                completion(.success(placemarks?.first))
-        }
-    }
-    
-    func coordinatesFromCity(city: String, completion: @escaping (Result<CLPlacemark?, Error>) -> Void) {
-        CLGeocoder()
-            .geocodeAddressString(city) { placemarks, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                completion(.success(placemarks?.first))
         }
     }
 }
