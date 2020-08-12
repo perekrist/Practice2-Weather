@@ -80,15 +80,3 @@ extension MapViewModel {
         }
     }
 }
-
-extension MapViewModel: MapPickViewModelDelegate {
-    func mapPickViewModelDidTapClose(_ viewModel: MapPickViewModel) {
-        viewModel.isOpened = false
-        self.onDidUpdate?()
-    }
-    
-    func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
-        viewModel.isOpened = false
-        self.onDidUpdate?()
-    }
-}

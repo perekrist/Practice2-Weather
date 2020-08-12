@@ -121,7 +121,7 @@ extension MapViewController {
     
     private func configureMapPickView() {
         mapPickView = MapPickView()
-        let mapPickViewModel = MapPickViewModel(delegate: viewModel)
+        let mapPickViewModel = MapPickViewModel(delegate: self)
         mapPickView!.setup(with: mapPickViewModel)
         view.addSubview(mapPickView!)
     }
@@ -178,5 +178,16 @@ extension MapViewController {
             self.setupMapPickView(bottomConstraint: 170)
             self.view.layoutIfNeeded()
         }, completion: nil)
+    }
+}
+
+extension MapViewController: MapPickViewModelDelegate {
+    func mapPickViewModelDidTapClose() {
+        closeMapPickView()
+    }
+    
+    func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
+        guard let city = self.viewModel.selectedCity else { return }
+        print("City: " + city)
     }
 }
