@@ -55,23 +55,24 @@ extension MapViewController {
     
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
-            guard let cityName = self?.viewModel.selectedCity else {
-                self?.closeMapPickView()
+            guard let self = self else { return }
+            guard let cityName = self.viewModel.selectedCity else {
+                self.closeMapPickView()
                 return
             }
-            self?.mapPickView?.coordinateLabel.text = self?.viewModel.selectedCoordinate?.dms
-            self?.mapPickView?.cityLabel.text = cityName
+            self.mapPickView?.coordinateLabel.text = self.viewModel.selectedCoordinate?.dms
+            self.mapPickView?.cityLabel.text = cityName
             
-            let pin = MKPlacemark(coordinate: (self?.viewModel.selectedCoordinate!)!)
-            self?.mapView!.removeAnnotations((self?.mapView!.annotations)!)
-            self?.mapView!.addAnnotation(pin)
-            self?.mapView!.setCenter((self?.viewModel.selectedCoordinate!)!, animated: true)
+            let pin = MKPlacemark(coordinate: self.viewModel.selectedCoordinate!)
+            self.mapView!.removeAnnotations(self.mapView!.annotations)
+            self.mapView!.addAnnotation(pin)
+            self.mapView!.setCenter(self.viewModel.selectedCoordinate!, animated: true)
             
-            guard let isOpened = self?.mapPickView?.viewModel?.isOpened else { return }
+            guard let isOpened = self.mapPickView?.viewModel?.isOpened else { return }
             if isOpened {
-                self?.closeMapPickView()
+                self.closeMapPickView()
             } else {
-                self?.showMapPickView()
+                self.showMapPickView()
             }
         }
         
