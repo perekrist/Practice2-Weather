@@ -8,5 +8,6 @@ target 'Practice2-Weather' do
   # Pods for Practice2-Weather
 	
   pod 'SnapKit'
+  pod 'SVProgressHUD'
 
 end

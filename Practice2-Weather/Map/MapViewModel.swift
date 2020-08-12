@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SVProgressHUD
 
 class MapViewModel {
     
@@ -17,13 +18,16 @@ class MapViewModel {
     var onDidUpdate: (() -> Void)?
     
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
+        SVProgressHUD.show()
         cityFromCoordinates(coordinate: coordinate) { result in
             switch result {
             case .success(let placemark):
+                SVProgressHUD.dismiss()
                 self.selectedCity = placemark?.locality
                 self.selectedCoordinate = placemark?.location?.coordinate
                 self.onDidUpdate?()
             case .failure(let error):
+                SVProgressHUD.dismiss()
                 print(error)
                 self.selectedCity = nil
             }
@@ -31,13 +35,16 @@ class MapViewModel {
     }
     
     func geocodeCoordinateFromCity(city: String) {
+        SVProgressHUD.show()
         coordinatesFromCity(city: city) { result in
             switch result {
             case .success(let placemark):
+                SVProgressHUD.dismiss()
                 self.selectedCity = placemark?.locality
                 self.selectedCoordinate = placemark?.location?.coordinate
                 self.onDidUpdate?()
             case .failure(let error):
+                SVProgressHUD.dismiss()
                 print(error)
                 self.selectedCoordinate = nil
             }
