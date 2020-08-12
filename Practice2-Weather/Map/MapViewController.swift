@@ -64,6 +64,11 @@ extension MapViewController {
             self?.mapPickView?.coordinateLabel.text = self?.viewModel.selectedCoordinate?.dms
             self?.mapPickView?.cityLabel.text = cityName
             
+            let pin = MKPlacemark(coordinate: (self?.viewModel.selectedCoordinate!)!)
+            self?.mapView!.removeAnnotations((self?.mapView!.annotations)!)
+            self?.mapView!.addAnnotation(pin)
+            self?.mapView!.setCenter((self?.viewModel.selectedCoordinate!)!, animated: true)
+            
             guard let isOpened = self?.mapPickView?.viewModel?.isOpened else { return }
             if isOpened {
                 self?.closeMapPickView()
@@ -79,6 +84,7 @@ extension MapViewController {
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
     }
     
@@ -86,11 +92,17 @@ extension MapViewController {
         mapView = MKMapView()
         view.addSubview(mapView!)
         
+        let coordinate = CLLocationCoordinate2D(latitude: 45.16447, longitude: 9.43332)
+        
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapRecognizer))
         gestureRecognizer.delegate = self
         mapView!.addGestureRecognizer(gestureRecognizer)
-        mapView!.setCenter(CLLocationCoordinate2D(latitude: 45.16447, longitude: 9.43332), animated: true)
+        mapView!.setCenter(coordinate, animated: true)
         mapView!.mapType = .mutedStandard
+        
+        let pin = MKPlacemark(coordinate: coordinate)
+        mapView!.removeAnnotations(mapView!.annotations)
+        mapView!.addAnnotation(pin)
     }
     
     private func setupMapView() {
