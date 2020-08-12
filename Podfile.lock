@@ -1,20 +1,24 @@
 PODS:
   - SnapKit (5.0.1)
   - SVProgressHUD (2.2.5)
+  - SwiftLint (0.39.2)
 
 DEPENDENCIES:
   - SnapKit
   - SVProgressHUD
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
     - SnapKit
     - SVProgressHUD
+    - SwiftLint
 
 SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
 
-PODFILE CHECKSUM: 6f29a860051bca14c5ad7c0b5b96d7e6ed774a53
+PODFILE CHECKSUM: 35908ee11017d51a182ae4a66cf78057836d5602
 
 COCOAPODS: 1.9.1

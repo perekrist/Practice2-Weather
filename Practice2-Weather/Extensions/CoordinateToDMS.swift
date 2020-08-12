@@ -10,11 +10,11 @@ import Foundation
 import MapKit
 
 extension FloatingPoint {
-    var minutes:  Self {
+    var minutes: Self {
         return (self * 3600)
             .truncatingRemainder(dividingBy: 3600) / 60
     }
-    var seconds:  Self {
+    var seconds: Self {
         return (self * 3600)
             .truncatingRemainder(dividingBy: 3600)
             .truncatingRemainder(dividingBy: 60)
@@ -23,7 +23,7 @@ extension FloatingPoint {
 
 extension CLLocationCoordinate2D {
     var dms: String {
-        return (String(format:"%d°%d'%.1f\"%@ %d°%d'%.1f\"%@",
+        return (String(format: "%d°%d'%.1f\"%@ %d°%d'%.1f\"%@",
                        Int(abs(latitude)),
                        Int(abs(latitude.minutes)),
                        abs(latitude.seconds),
