@@ -11,7 +11,6 @@ import MapKit
 import SnapKit
 
 class MapViewController: UIViewController {
-    
     private let viewModel: MapViewModel
     
     private var mapView: MKMapView?
@@ -45,7 +44,6 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController {
-    
     private func initialSetup() {
         view.backgroundColor = .white
         bindToViewModel()
@@ -127,7 +125,7 @@ extension MapViewController {
     }
     
     private func setupMapPickView(bottomConstraint: Int) {
-        mapPickView?.snp.makeConstraints { (make) in
+        mapPickView?.snp.makeConstraints { make in
             make.trailing.equalTo(view.snp.trailing).offset(-16)
             make.leading.equalTo(view.snp.leading).offset(16)
             make.bottom.equalTo(view.snp.bottom).offset(bottomConstraint)
@@ -159,7 +157,7 @@ extension MapViewController: UISearchResultsUpdating {
         guard !text.isEmpty else { return }
         
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
             self.viewModel.geocodeCoordinateFromCity(city: text)
         })
     }

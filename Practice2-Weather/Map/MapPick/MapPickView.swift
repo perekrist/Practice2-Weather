@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class MapPickView: UIView {
-    
     var viewModel: MapPickViewModel?
     
     lazy var cityLabel = UILabel()
@@ -27,7 +26,6 @@ class MapPickView: UIView {
 }
 
 extension MapPickView {
-    
     func setup(with viewModel: MapPickViewModel) {
         self.viewModel = viewModel
         
@@ -39,26 +37,26 @@ extension MapPickView {
     
     private func setupLayout() {
         self.addSubview(cityLabel)
-        cityLabel.snp.makeConstraints { (make) in
+        cityLabel.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(16)
             make.leading.equalTo(self.snp.leading).offset(16)
         }
         
         self.addSubview(closeButton)
-        closeButton.snp.makeConstraints { (make) in
+        closeButton.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(20)
             make.trailing.equalTo(self.snp.trailing).offset(-20)
             make.width.height.equalTo(12)
         }
         
         self.addSubview(coordinateLabel)
-        coordinateLabel.snp.makeConstraints { (make) in
+        coordinateLabel.snp.makeConstraints { make in
             make.top.equalTo(cityLabel.snp.bottom).offset(2)
             make.leading.equalTo(self.snp.leading).offset(16)
         }
         
         self.addSubview(showWeatherButton)
-        showWeatherButton.snp.makeConstraints { (make) in
+        showWeatherButton.snp.makeConstraints { make in
             make.top.equalTo(coordinateLabel.snp.bottom).offset(37)
             make.leading.equalTo(self.snp.leading).offset(16)
             make.trailing.equalTo(self.snp.trailing).offset(-16)

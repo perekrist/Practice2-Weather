@@ -11,9 +11,8 @@ import MapKit
 import SVProgressHUD
 
 class MapViewModel {
-    
-    var selectedCity: String? = nil
-    var selectedCoordinate: CLLocationCoordinate2D? = nil
+    var selectedCity: String?
+    var selectedCoordinate: CLLocationCoordinate2D?
     var geoCodingService = GeoCodingService()
     
     var error = ""

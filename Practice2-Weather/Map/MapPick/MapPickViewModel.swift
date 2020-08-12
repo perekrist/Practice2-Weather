@@ -14,7 +14,6 @@ protocol MapPickViewModelDelegate: class {
 }
 
 class MapPickViewModel {
-    
     weak var delegate: MapPickViewModelDelegate?
     
     var city: String?
