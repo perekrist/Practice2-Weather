@@ -85,7 +85,7 @@ extension MapViewController {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.barTintColor = UIColor.white
-        navigationItem.title = "Global Weather"
+        navigationItem.title = Constants.navBarTitle
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -97,7 +97,7 @@ extension MapViewController {
         mapView = MKMapView()
         view.addSubview(mapView!)
         
-        let coordinate = CLLocationCoordinate2D(latitude: 45.16447, longitude: 9.43332)
+        let coordinate = Constants.startCoordinates
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapRecognizer))
         gestureRecognizer.delegate = self
