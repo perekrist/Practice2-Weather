@@ -64,20 +64,18 @@ extension MapViewController {
             self.mapPickView?.cityLabel.text = cityName
             
             let pin = MKPlacemark(coordinate: self.viewModel.selectedCoordinate!)
+            let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 500000, longitudinalMeters: 500000)
             self.mapView!.removeAnnotations(self.mapView!.annotations)
             self.mapView!.addAnnotation(pin)
             self.mapView!.setCenter(self.viewModel.selectedCoordinate!, animated: true)
+            self.mapView!.setRegion(coordinateRegion, animated: true)
             
-            guard let isOpened = self.mapPickView?.viewModel?.isOpened else { return }
-            if isOpened {
-                self.closeMapPickView()
-            } else {
-                self.showMapPickView()
-            }
+            self.showMapPickView()
         }
         
         viewModel.onDidError = { [weak self] in
             guard let error = self?.viewModel.error else { return }
+            print("eeerrr:      " + error)
             self?.showError(error)
         }
     }
@@ -105,8 +103,12 @@ extension MapViewController {
         mapView!.mapType = .mutedStandard
         
         let pin = MKPlacemark(coordinate: coordinate)
+        let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 500000, longitudinalMeters: 500000)
         mapView!.removeAnnotations(mapView!.annotations)
         mapView!.addAnnotation(pin)
+        mapView!.setRegion(coordinateRegion, animated: true)
+        
+        showMapPickView()
     }
     
     private func setupMapView() {

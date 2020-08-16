@@ -18,7 +18,6 @@ class MapPickViewModel {
     
     var city: String?
     var coordinate: String?
-    var isOpened = false
         
     init(delegate: MapPickViewModelDelegate) {
         self.delegate = delegate
