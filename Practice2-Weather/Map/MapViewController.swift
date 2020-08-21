@@ -66,12 +66,6 @@ extension MapViewController {
             
             self.showMapPickView()
         }
-        
-        viewModel.onDidError = { [weak self] in
-            guard let error = self?.viewModel.error else { return }
-            print("error: " + error)
-            self?.showError(error)
-        }
     }
     
     private func setupNavigationBar() {

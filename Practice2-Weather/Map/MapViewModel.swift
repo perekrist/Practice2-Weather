@@ -20,14 +20,9 @@ class MapViewModel {
     var selectedCity: String?
     var selectedCoordinate: CLLocationCoordinate2D?
     var geoCodingService = GeoCodingService()
-    
-    var error = ""
-    
+        
     var onDidUpdate: (() -> Void)?
-    var onDidError: (() -> Void)?
-    
-    var mapPickViewIsOpened = false
-    
+        
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
         SVProgressHUD.show()
         geoCodingService.cityFromCoordinates(coordinate: coordinate) { result in
@@ -39,8 +34,7 @@ class MapViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                print("errrror: " + error.localizedDescription)
-                self.error = error.localizedDescription
+                print("error: " + error.localizedDescription)
                 self.selectedCity = nil
             }
         }
@@ -57,8 +51,7 @@ class MapViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                print("errrror: " + error.localizedDescription)
-                self.error = error.localizedDescription
+                print("error: " + error.localizedDescription)
                 self.selectedCoordinate = nil
             }
         }
@@ -71,7 +64,7 @@ class MapViewModel {
 
 extension MapViewModel: MapPickViewModelDelegate {
     func mapPickViewModelDidTapClose(_ viewModel: MapPickViewModel) {
-        self.mapPickViewIsOpened = false
+        print("close")
     }
     
     func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
