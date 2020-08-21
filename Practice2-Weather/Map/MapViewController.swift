@@ -189,6 +189,6 @@ extension MapViewController: MapPickViewModelDelegate {
     
     func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
         guard let city = self.viewModel.selectedCity else { return }
-        print("City: " + city)
+        self.viewModel.delegate?.mapViewModel(self.viewModel, didRequestShowWeatherFor: city)
     }
 }

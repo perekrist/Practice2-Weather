@@ -10,8 +10,13 @@ import UIKit
 
 class WeatherViewModel {
     var error = ""
+    let cityName: String
     
     var onDidUpdate: (() -> Void)?
     var onDidError: (() -> Void)?
+    
+    init(city: String) {
+        self.cityName = city
+    }
     
 }

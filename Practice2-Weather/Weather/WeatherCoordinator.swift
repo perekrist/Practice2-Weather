@@ -10,14 +10,16 @@ import UIKit
 
 class WeatherCoordinator: Coordinator {
     let rootViewController: UINavigationController
+    let city: String
     
-    init(rootViewController: UINavigationController) {
+    init(rootViewController: UINavigationController, city: String) {
         self.rootViewController = rootViewController
+        self.city = city
     }
     
     override func start() {
-        let weatherViewModel = WeatherViewModel()
+        let weatherViewModel = WeatherViewModel(city: city)
         let weatherViewController = WeatherViewController(viewModel: weatherViewModel)
-        rootViewController.setViewControllers([weatherViewController], animated: false)
+        rootViewController.pushViewController(weatherViewController, animated: true)
     }
 }

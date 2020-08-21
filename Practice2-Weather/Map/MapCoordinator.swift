@@ -21,3 +21,11 @@ class MapCoordinator: Coordinator {
         rootViewController.setViewControllers([mapViewController], animated: false)
     }
 }
+
+extension MapCoordinator: MapViewModelDelegate {
+    func mapViewModel(_ viewModel: MapViewModel, didRequestShowWeatherFor city: String) {
+        let weatherCoordinator = WeatherCoordinator(rootViewController: rootViewController, city: city)
+        addChildCoordinator(weatherCoordinator)
+        weatherCoordinator.start()
+    }
+}

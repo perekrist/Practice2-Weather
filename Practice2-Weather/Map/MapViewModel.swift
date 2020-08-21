@@ -10,7 +10,13 @@ import UIKit
 import MapKit
 import SVProgressHUD
 
+protocol MapViewModelDelegate: class {
+    func mapViewModel(_ viewModel: MapViewModel, didRequestShowWeatherFor city: String)
+}
+
 class MapViewModel {
+    weak var delegate: MapViewModelDelegate?
+    
     var selectedCity: String?
     var selectedCoordinate: CLLocationCoordinate2D?
     var geoCodingService = GeoCodingService()
