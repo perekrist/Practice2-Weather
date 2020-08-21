@@ -25,6 +25,7 @@
 		CA6DFC3224D2EBAC001F65B7 /* MapPickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC3124D2EBAC001F65B7 /* MapPickViewModel.swift */; };
 		CA6DFC3524D3E763001F65B7 /* CoordinateToDMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */; };
 		CAFA13CB24EFA47B001A0EDB /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CA24EFA47B001A0EDB /* Api.swift */; };
+		CAFA13CD24EFA818001A0EDB /* ApiNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		CA6DFC3124D2EBAC001F65B7 /* MapPickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickViewModel.swift; sourceTree = "<group>"; };
 		CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateToDMS.swift; sourceTree = "<group>"; };
 		CAFA13CA24EFA47B001A0EDB /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiNetworkingService.swift; sourceTree = "<group>"; };
 		FFED2C848DF916DFC899D400 /* Pods-Practice2-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practice2-Weather.release.xcconfig"; path = "Target Support Files/Pods-Practice2-Weather/Pods-Practice2-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				CA010B6024E4288A00F04910 /* GeoCodingService.swift */,
+				CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -179,8 +182,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA6DFC2024D2AAC2001F65B7 /* Build configuration list for PBXNativeTarget "Practice2-Weather" */;
 			buildPhases = (
-				CA010B6A24E42DF000F04910 /* ShellScript */,
 				93CB355681342938867AB161 /* [CP] Check Pods Manifest.lock */,
+				CA010B6A24E42DF000F04910 /* ShellScript */,
 				CA6DFC0824D2AABC001F65B7 /* Sources */,
 				CA6DFC0924D2AABC001F65B7 /* Frameworks */,
 				CA6DFC0A24D2AABC001F65B7 /* Resources */,
@@ -312,6 +315,7 @@
 				CA6DFC2A24D2B3D0001F65B7 /* MapViewModel.swift in Sources */,
 				CA6DFC3224D2EBAC001F65B7 /* MapPickViewModel.swift in Sources */,
 				CA6DFC2624D2B271001F65B7 /* Coordinator.swift in Sources */,
+				CAFA13CD24EFA818001A0EDB /* ApiNetworkingService.swift in Sources */,
 				CA6DFC2D24D2B414001F65B7 /* MapCoordinator.swift in Sources */,
 				CA6DFC3024D2EB84001F65B7 /* MapPickView.swift in Sources */,
 				CAFA13CB24EFA47B001A0EDB /* Api.swift in Sources */,

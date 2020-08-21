@@ -10,5 +10,6 @@ target 'Practice2-Weather' do
   pod 'SnapKit'
   pod 'SVProgressHUD'
   pod 'SwiftLint'
+  pod 'Alamofire'
 
 end
