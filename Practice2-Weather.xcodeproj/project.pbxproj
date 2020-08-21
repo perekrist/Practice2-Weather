@@ -26,6 +26,7 @@
 		CA6DFC3524D3E763001F65B7 /* CoordinateToDMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */; };
 		CAFA13CB24EFA47B001A0EDB /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CA24EFA47B001A0EDB /* Api.swift */; };
 		CAFA13CD24EFA818001A0EDB /* ApiNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */; };
+		CAFA13D024EFAD08001A0EDB /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CF24EFAD08001A0EDB /* Weather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateToDMS.swift; sourceTree = "<group>"; };
 		CAFA13CA24EFA47B001A0EDB /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiNetworkingService.swift; sourceTree = "<group>"; };
+		CAFA13CF24EFAD08001A0EDB /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		FFED2C848DF916DFC899D400 /* Pods-Practice2-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practice2-Weather.release.xcconfig"; path = "Target Support Files/Pods-Practice2-Weather/Pods-Practice2-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 		CA6DFC0E24D2AABC001F65B7 /* Practice2-Weather */ = {
 			isa = PBXGroup;
 			children = (
+				CAFA13CE24EFACF2001A0EDB /* Models */,
 				CA010B6224E4292700F04910 /* Values */,
 				CA010B5F24E4285E00F04910 /* Services */,
 				CA6DFC3324D3E6ED001F65B7 /* Extensions */,
@@ -164,6 +167,14 @@
 				CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CAFA13CE24EFACF2001A0EDB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CAFA13CF24EFAD08001A0EDB /* Weather.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		DE0E318F38E13398FFF40586 /* Pods */ = {
@@ -308,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA6DFC3524D3E763001F65B7 /* CoordinateToDMS.swift in Sources */,
+				CAFA13D024EFAD08001A0EDB /* Weather.swift in Sources */,
 				CA4429DC24E95D1B00BE363A /* WeatherViewModel.swift in Sources */,
 				CA010B6424E4294500F04910 /* Constants.swift in Sources */,
 				CA010B6124E4288A00F04910 /* GeoCodingService.swift in Sources */,

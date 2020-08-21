@@ -40,18 +40,13 @@ class WeatherViewController: UIViewController {
 extension WeatherViewController {
     private func initialSetup() {
         view.backgroundColor = .white
+        viewModel.getWeather()
         bindToViewModel()
     }
     
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
-        }
-        
-        viewModel.onDidError = { [weak self] in
-            guard let error = self?.viewModel.error else { return }
-            print("eeerrr:      " + error)
-            self?.showError(error)
         }
     }
     
