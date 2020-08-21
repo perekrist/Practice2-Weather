@@ -58,12 +58,11 @@ extension MapViewController {
             self.mapPickView?.coordinateLabel.text = self.viewModel.selectedCoordinate?.dms
             self.mapPickView?.cityLabel.text = cityName
             
-            let pin = MKPlacemark(coordinate: self.viewModel.selectedCoordinate!)
-            let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 500000, longitudinalMeters: 500000)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = self.viewModel.selectedCoordinate!
             self.mapView!.removeAnnotations(self.mapView!.annotations)
-            self.mapView!.addAnnotation(pin)
+            self.mapView!.addAnnotation(annotation)
             self.mapView!.setCenter(self.viewModel.selectedCoordinate!, animated: true)
-            self.mapView!.setRegion(coordinateRegion, animated: true)
             
             self.showMapPickView()
         }
@@ -99,7 +98,7 @@ extension MapViewController {
     }
     
     private func setupMapView() {
-        mapView!.snp.makeConstraints { (make) in
+        mapView!.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
             make.trailing.equalTo(view.snp.trailing)
             make.leading.equalTo(view.snp.leading)
