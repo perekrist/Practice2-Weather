@@ -36,11 +36,6 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .never
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
 }
 
 extension MapViewController {
@@ -75,7 +70,7 @@ extension MapViewController {
         
         viewModel.onDidError = { [weak self] in
             guard let error = self?.viewModel.error else { return }
-            print("eeerrr:      " + error)
+            print("error: " + error)
             self?.showError(error)
         }
     }
@@ -101,14 +96,6 @@ extension MapViewController {
         mapView!.addGestureRecognizer(gestureRecognizer)
         mapView!.setCenter(coordinate, animated: true)
         mapView!.mapType = .mutedStandard
-        
-        let pin = MKPlacemark(coordinate: coordinate)
-        let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 500000, longitudinalMeters: 500000)
-        mapView!.removeAnnotations(mapView!.annotations)
-        mapView!.addAnnotation(pin)
-        mapView!.setRegion(coordinateRegion, animated: true)
-        
-        showMapPickView()
     }
     
     private func setupMapView() {
@@ -122,7 +109,7 @@ extension MapViewController {
     
     private func configureMapPickView() {
         mapPickView = MapPickView()
-        let mapPickViewModel = MapPickViewModel(delegate: self)
+        let mapPickViewModel = MapPickViewModel(delegate: viewModel)
         mapPickView!.setup(with: mapPickViewModel)
         view.addSubview(mapPickView!)
     }
@@ -150,6 +137,7 @@ extension MapViewController: UIGestureRecognizerDelegate {
         let location = sender.location(in: mapView)
         let coordinate = mapView!.convert(location, toCoordinateFrom: mapView)
         
+        viewModel.selectedCoordinate = coordinate
         viewModel.geocodeCityFromCoordinate(coordinate: coordinate)
     }
 }
@@ -179,16 +167,5 @@ extension MapViewController {
             self.setupMapPickView(bottomConstraint: 170)
             self.view.layoutIfNeeded()
         }, completion: nil)
-    }
-}
-
-extension MapViewController: MapPickViewModelDelegate {
-    func mapPickViewModelDidTapClose() {
-        closeMapPickView()
-    }
-    
-    func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
-        guard let city = self.viewModel.selectedCity else { return }
-        self.viewModel.delegate?.mapViewModel(self.viewModel, didRequestShowWeatherFor: city)
     }
 }

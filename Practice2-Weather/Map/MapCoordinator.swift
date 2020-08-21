@@ -17,6 +17,7 @@ class MapCoordinator: Coordinator {
     
     override func start() {
         let mapViewModel = MapViewModel()
+        mapViewModel.delegate = self
         let mapViewController = MapViewController(viewModel: mapViewModel)
         rootViewController.setViewControllers([mapViewController], animated: false)
     }
@@ -24,7 +25,7 @@ class MapCoordinator: Coordinator {
 
 extension MapCoordinator: MapViewModelDelegate {
     func mapViewModel(_ viewModel: MapViewModel, didRequestShowWeatherFor city: String) {
-        let weatherCoordinator = WeatherCoordinator(rootViewController: rootViewController, city: city)
+        let weatherCoordinator = WeatherCoordinator(rootViewController: self.rootViewController, city: city)
         addChildCoordinator(weatherCoordinator)
         weatherCoordinator.start()
     }

@@ -26,6 +26,8 @@ class MapViewModel {
     var onDidUpdate: (() -> Void)?
     var onDidError: (() -> Void)?
     
+    var mapPickViewIsOpened = false
+    
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
         SVProgressHUD.show()
         geoCodingService.cityFromCoordinates(coordinate: coordinate) { result in
@@ -60,5 +62,19 @@ class MapViewModel {
                 self.selectedCoordinate = nil
             }
         }
+    }
+    
+    private func goToWeather() {
+        delegate?.mapViewModel(self, didRequestShowWeatherFor: selectedCity!)
+    }
+}
+
+extension MapViewModel: MapPickViewModelDelegate {
+    func mapPickViewModelDidTapClose(_ viewModel: MapPickViewModel) {
+        self.mapPickViewIsOpened = false
+    }
+    
+    func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
+        goToWeather()
     }
 }

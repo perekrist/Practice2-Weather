@@ -9,7 +9,7 @@
 import Foundation
 
 protocol MapPickViewModelDelegate: class {
-    func mapPickViewModelDidTapClose()
+    func mapPickViewModelDidTapClose(_ viewModel: MapPickViewModel)
     func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel)
 }
 
@@ -24,7 +24,7 @@ class MapPickViewModel {
     }
     
     func onCloseButton() {
-        delegate?.mapPickViewModelDidTapClose()
+        delegate?.mapPickViewModelDidTapClose(self)
     }
     
     func onShowWeatherButton() {
