@@ -13,4 +13,5 @@ enum Constants {
     static let startCoordinates = CLLocationCoordinate2D(latitude: 45.16447, longitude: 9.43332)
     static let navBarTitle = "Global Weather"
     static let apiUrl = "http://api.openweathermap.org/data/2.5/weather"
+    static let backButtonTitle = "Map"
 }

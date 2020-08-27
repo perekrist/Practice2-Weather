@@ -18,6 +18,8 @@ class WeatherViewModel {
     
     var error = ""
     let cityName: String
+    
+    var weatherForecast: Weather?
         
     var apiService: ApiNetworkingService?
     
@@ -34,7 +36,8 @@ class WeatherViewModel {
             switch result {
             case .success(let weather):
                 SVProgressHUD.dismiss()
-                print(weather)
+                self.weatherForecast = weather
+                self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
                 print(error)

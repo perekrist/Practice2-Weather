@@ -10,6 +10,19 @@ import UIKit
 import SnapKit
 
 class WeatherViewController: UIViewController {
+    lazy var cityLabel = UILabel()
+    lazy var tempLabel = UILabel()
+    lazy var weatherLabel = UILabel()
+    lazy var weatherImage = UIImageView()
+    lazy var humidityLabel = UILabel()
+    lazy var windLabel = UILabel()
+    lazy var pressureLabel = UILabel()
+    lazy var weatherImageLarge = UIImageView()
+    
+    lazy var humidity = UILabel()
+    lazy var wind = UILabel()
+    lazy var pressure = UILabel()
+    
     private let viewModel: WeatherViewModel
     
     init(viewModel: WeatherViewModel) {
@@ -42,11 +55,105 @@ extension WeatherViewController {
         view.backgroundColor = .white
         viewModel.getWeather()
         bindToViewModel()
+        setupLabels()
+        setupLayout()
     }
     
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
+            let weatherForecast = self.viewModel.weatherForecast
+            self.cityLabel.text = self.viewModel.cityName
+            self.tempLabel.text = "\(weatherForecast?.details?.temperature)"
+            self.weatherLabel.text = "\(weatherForecast?.info?.first?.description)"
+            self.humidityLabel.text = "\(weatherForecast?.details?.humidity) %"
+            self.windLabel.text = "\(weatherForecast?.wind?.speed) m/s"
+            self.pressureLabel.text = "\(weatherForecast?.details?.pressure) mm Hg"
+        }
+    }
+    
+    private func setupLabels() {
+        cityLabel.textColor = #colorLiteral(red: 0.2078431373, green: 0.2078431373, blue: 0.2078431373, alpha: 1)
+        cityLabel.font = .systemFont(ofSize: 34)
+        
+        weatherLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        weatherLabel.font = .systemFont(ofSize: 120)
+        
+        humidity.text = "HUMIDITY"
+        humidity.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        humidity.font = .systemFont(ofSize: 18)
+        
+        humidityLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        humidityLabel.font = .systemFont(ofSize: 18)
+        
+        wind.text = "WIND"
+        wind.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        wind.font = .systemFont(ofSize: 18)
+        
+        windLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        windLabel.font = .systemFont(ofSize: 18)
+        
+        pressure.text = "PRESSURE"
+        pressure.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        pressure.font = .systemFont(ofSize: 18)
+        
+        pressureLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        pressureLabel.font = .systemFont(ofSize: 18)
+    }
+    
+    private func setupLayout() {
+        view.addSubview(cityLabel)
+        cityLabel.snp.makeConstraints { make in
+            make.top.equalTo(50)
+            make.leading.equalTo(16)
+        }
+        
+        view.addSubview(tempLabel)
+        tempLabel.snp.makeConstraints { make in
+            make.top.equalTo(cityLabel.snp.bottom).offset(24)
+            make.leading.equalTo(15)
+        }
+        
+        view.addSubview(weatherLabel)
+        weatherLabel.snp.makeConstraints { make in
+            make.top.equalTo(tempLabel.snp.bottom).offset(65)
+            make.leading.equalTo(34)
+        }
+        
+        view.addSubview(pressureLabel)
+        pressureLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(-21)
+            make.leading.equalTo(15)
+        }
+        
+        view.addSubview(pressure)
+        pressure.snp.makeConstraints { make in
+            make.bottom.equalTo(pressureLabel.snp.top).offset(-10)
+            make.leading.equalTo(16)
+        }
+        
+        view.addSubview(windLabel)
+        windLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(pressure.snp.top).offset(-40)
+            make.leading.equalTo(15)
+        }
+        
+        view.addSubview(wind)
+        wind.snp.makeConstraints { make in
+            make.bottom.equalTo(windLabel.snp.top).offset(-10)
+            make.leading.equalTo(16)
+        }
+        
+        view.addSubview(humidityLabel)
+        humidityLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(wind.snp.top).offset(-40)
+            make.leading.equalTo(15)
+        }
+        
+        view.addSubview(humidity)
+        humidity.snp.makeConstraints { make in
+            make.bottom.equalTo(humidityLabel.snp.top).offset(-10)
+            make.leading.equalTo(16)
         }
     }
     

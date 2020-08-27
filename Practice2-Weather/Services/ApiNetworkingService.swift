@@ -16,7 +16,7 @@ class ApiNetworkingService {
         let params = [
             "q": city,
             "units": "metric",
-            "APPID": Api.key
+            "appid": Api.key
         ]
         
         AF.request(url, method: .get, parameters: params).responseData { response in
