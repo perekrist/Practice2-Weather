@@ -64,41 +64,44 @@ extension WeatherViewController {
             guard let self = self else { return }
             let weatherForecast = self.viewModel.weatherForecast
             self.cityLabel.text = self.viewModel.cityName
-            self.tempLabel.text = "\(weatherForecast?.details?.temperature)"
-            self.weatherLabel.text = "\(weatherForecast?.info?.first?.description)"
-            self.humidityLabel.text = "\(weatherForecast?.details?.humidity) %"
-            self.windLabel.text = "\(weatherForecast?.wind?.speed) m/s"
-            self.pressureLabel.text = "\(weatherForecast?.details?.pressure) mm Hg"
+            self.tempLabel.text = String(Int((weatherForecast?.main.temp) ?? 0))
+            self.weatherLabel.text = weatherForecast?.weather.first?.description
+            self.humidityLabel.text = "\(Double((weatherForecast?.main.humidity) ?? 0)) %"
+            self.windLabel.text = "\(self.viewModel.compassDirection(for: weatherForecast?.wind.deg ?? -1)) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
+            self.pressureLabel.text = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
         }
     }
     
     private func setupLabels() {
         cityLabel.textColor = #colorLiteral(red: 0.2078431373, green: 0.2078431373, blue: 0.2078431373, alpha: 1)
-        cityLabel.font = .systemFont(ofSize: 34)
+        cityLabel.font = .boldSystemFont(ofSize: 34)
+        
+        tempLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        tempLabel.font = .boldSystemFont(ofSize: 120)
         
         weatherLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        weatherLabel.font = .systemFont(ofSize: 120)
+        weatherLabel.font = .systemFont(ofSize: 18)
         
         humidity.text = "HUMIDITY"
         humidity.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         humidity.font = .systemFont(ofSize: 18)
         
         humidityLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        humidityLabel.font = .systemFont(ofSize: 18)
+        humidityLabel.font = .boldSystemFont(ofSize: 18)
         
         wind.text = "WIND"
         wind.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         wind.font = .systemFont(ofSize: 18)
         
         windLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        windLabel.font = .systemFont(ofSize: 18)
+        windLabel.font = .boldSystemFont(ofSize: 18)
         
         pressure.text = "PRESSURE"
         pressure.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         pressure.font = .systemFont(ofSize: 18)
         
         pressureLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        pressureLabel.font = .systemFont(ofSize: 18)
+        pressureLabel.font = .boldSystemFont(ofSize: 18)
     }
     
     private func setupLayout() {

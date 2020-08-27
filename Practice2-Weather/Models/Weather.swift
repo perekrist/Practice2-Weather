@@ -9,25 +9,25 @@
 import Foundation
 
 struct Weather: Codable {
-    let info: [WeatherInfo]?
-    let details: WeatherDetails?
-    let wind: WeatherWind?
+    let weather: [WeatherForecast]
+    let main: WeatherMain
+    let wind: WeatherWind
 }
 
-struct WeatherInfo: Codable {
-    let id: Int?
-    let description: String?
-    let icon: String?
+struct WeatherForecast: Codable {
+    let id: Int
+    let description: String
+    let icon: String
 }
 
-struct WeatherDetails: Codable {
-    let temperature: Double?
-    let pressure: Double?
-    let humidity: Double?
+struct WeatherMain: Codable {
+    let temp: Double
+    let pressure: Double
+    let humidity: Double
 }
 
 struct WeatherWind: Codable {
-    let speed: Double?
-    let direction: Double?
+    let speed: Double
+    let deg: Double
 }
 

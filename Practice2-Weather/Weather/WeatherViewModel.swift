@@ -20,7 +20,7 @@ class WeatherViewModel {
     let cityName: String
     
     var weatherForecast: Weather?
-        
+    
     var apiService: ApiNetworkingService?
     
     var onDidUpdate: (() -> Void)?
@@ -43,5 +43,12 @@ class WeatherViewModel {
                 print(error)
             }
         }
+    }
+    
+    func compassDirection(for deg: Double) -> String {
+        if deg < 0 { return "Wind direction error" }
+        let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+        let index = Int((deg + 22.5) / 45.0) & 7
+        return directions[index]
     }
 }
