@@ -58,6 +58,7 @@ extension WeatherViewController {
         viewModel.getWeather()
         bindToViewModel()
         setupLabels()
+        setupImages()
         setupLayout()
     }
     
@@ -118,6 +119,11 @@ extension WeatherViewController {
         pressureLabel.font = .boldSystemFont(ofSize: 18)
     }
     
+    private func setupImages() {
+        weatherImage.contentMode = .scaleAspectFit
+        weatherImageLarge.contentMode = .scaleAspectFit
+    }
+    
     private func setupLayout() {
         view.addSubview(cityLabel)
         cityLabel.snp.makeConstraints { make in
@@ -143,7 +149,6 @@ extension WeatherViewController {
             make.leading.equalTo(17)
             make.height.equalTo(87)
         }
-        weatherImage.contentMode = .scaleAspectFit
         
         view.addSubview(weatherLabel)
         weatherLabel.snp.makeConstraints { make in
@@ -192,7 +197,6 @@ extension WeatherViewController {
             make.trailing.equalTo(0)
             make.bottom.equalTo(0)
         }
-        weatherImageLarge.contentMode = .scaleAspectFit
     }
     
     private func setupImageView(_ imageName: String) {
