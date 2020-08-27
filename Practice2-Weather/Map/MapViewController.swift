@@ -71,6 +71,7 @@ extension MapViewController {
     private func setupNavigationBar() {
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationItem.title = Constants.navBarTitle
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: Constants.backButtonTitle, style: .plain, target: nil, action: nil)
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
