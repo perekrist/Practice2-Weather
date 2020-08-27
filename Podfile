@@ -11,5 +11,6 @@ target 'Practice2-Weather' do
   pod 'SVProgressHUD'
   pod 'SwiftLint'
   pod 'Alamofire'
+  pod 'Kingfisher'
 
 end

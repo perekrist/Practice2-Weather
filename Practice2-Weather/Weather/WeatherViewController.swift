@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class WeatherViewController: UIViewController {
     lazy var cityLabel = UILabel()
@@ -18,6 +19,7 @@ class WeatherViewController: UIViewController {
     lazy var windLabel = UILabel()
     lazy var pressureLabel = UILabel()
     lazy var weatherImageLarge = UIImageView()
+    lazy var celsius = UILabel()
     
     lazy var humidity = UILabel()
     lazy var wind = UILabel()
@@ -65,10 +67,17 @@ extension WeatherViewController {
             let weatherForecast = self.viewModel.weatherForecast
             self.cityLabel.text = self.viewModel.cityName
             self.tempLabel.text = String(Int((weatherForecast?.main.temp) ?? 0))
-            self.weatherLabel.text = weatherForecast?.weather.first?.description
+            self.weatherLabel.text = weatherForecast?.weather.first?.main
             self.humidityLabel.text = "\(Double((weatherForecast?.main.humidity) ?? 0)) %"
             self.windLabel.text = "\(self.viewModel.compassDirection(for: weatherForecast?.wind.deg ?? -1)) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
             self.pressureLabel.text = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
+            
+            let imageName = weatherForecast?.weather.first?.description
+            self.setupImageView(imageName ?? "rain")
+            
+            let url = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
+            self.weatherImage.kf.setImage(with: url)
+            
         }
     }
     
@@ -78,6 +87,11 @@ extension WeatherViewController {
         
         tempLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         tempLabel.font = .boldSystemFont(ofSize: 120)
+        
+        celsius.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        celsius.text = "°C"
+        celsius.font = .systemFont(ofSize: 50)
+        
         
         weatherLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         weatherLabel.font = .systemFont(ofSize: 18)
@@ -107,7 +121,7 @@ extension WeatherViewController {
     private func setupLayout() {
         view.addSubview(cityLabel)
         cityLabel.snp.makeConstraints { make in
-            make.top.equalTo(50)
+            make.top.equalTo(100)
             make.leading.equalTo(16)
         }
         
@@ -117,9 +131,23 @@ extension WeatherViewController {
             make.leading.equalTo(15)
         }
         
+        view.addSubview(celsius)
+        celsius.snp.makeConstraints { make in
+            make.top.equalTo(tempLabel.snp.top).offset(15)
+            make.leading.equalTo(tempLabel.snp.trailing)
+        }
+        
+        view.addSubview(weatherImage)
+        weatherImage.snp.makeConstraints { make in
+            make.top.equalTo(tempLabel.snp.bottom).offset(10)
+            make.leading.equalTo(17)
+            make.height.equalTo(87)
+        }
+        weatherImage.contentMode = .scaleAspectFit
+        
         view.addSubview(weatherLabel)
         weatherLabel.snp.makeConstraints { make in
-            make.top.equalTo(tempLabel.snp.bottom).offset(65)
+            make.top.equalTo(weatherImage.snp.bottom).offset(12)
             make.leading.equalTo(34)
         }
         
@@ -158,6 +186,18 @@ extension WeatherViewController {
             make.bottom.equalTo(humidityLabel.snp.top).offset(-10)
             make.leading.equalTo(16)
         }
+        
+        view.addSubview(weatherImageLarge)
+        weatherImageLarge.snp.makeConstraints { make in
+            make.trailing.equalTo(0)
+            make.bottom.equalTo(0)
+        }
+        weatherImageLarge.contentMode = .scaleAspectFit
+    }
+    
+    private func setupImageView(_ imageName: String) {
+        guard let image = UIImage(named: imageName) else { return }
+        weatherImageLarge.image = image
     }
     
     private func showError(_ error: String) {
