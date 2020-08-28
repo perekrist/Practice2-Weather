@@ -73,12 +73,12 @@ extension WeatherViewController {
             self.windLabel.text = "\(self.viewModel.compassDirection(for: weatherForecast?.wind.deg ?? -1)) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
             self.pressureLabel.text = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
             
-            let imageName = weatherForecast?.weather.first?.description
+            let imageName = weatherForecast?.weather.first?.description.lowercased()
+            self.setupImageView("rain")
             self.setupImageView(imageName ?? "rain")
             
             let url = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
             self.weatherImage.kf.setImage(with: url)
-            
         }
     }
     
