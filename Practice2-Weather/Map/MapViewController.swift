@@ -51,6 +51,7 @@ extension MapViewController {
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
+            print("city: " + (self.viewModel.selectedCity ??  "-"))
             guard let cityName = self.viewModel.selectedCity else {
                 self.closeMapPickView()
                 return
@@ -65,6 +66,11 @@ extension MapViewController {
             self.mapView!.setCenter(self.viewModel.selectedCoordinate!, animated: true)
             
             self.showMapPickView()
+        }
+        
+        viewModel.onDidError = { [weak self] in
+            guard let error = self?.viewModel.error else { return }
+            self?.showError(error)
         }
     }
     
