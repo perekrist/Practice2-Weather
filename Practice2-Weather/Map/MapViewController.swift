@@ -16,9 +16,6 @@ class MapViewController: UIViewController {
     private var mapView: MKMapView?
     private var mapPickView: MapPickView?
     
-    var openBottomConstraint: Constraint?
-    var closeBottomConstraint: Constraint?
-    
     var timer: Timer?
     
     init(viewModel: MapViewModel) {
@@ -117,7 +114,7 @@ extension MapViewController {
     }
     
     private func setupMapPickView(bottomConstraint: Int) {
-        mapPickView?.snp.makeConstraints { make in
+        mapPickView?.snp.remakeConstraints { make in
             make.trailing.equalTo(view.snp.trailing).offset(-16)
             make.leading.equalTo(view.snp.leading).offset(16)
             make.bottom.equalTo(view.snp.bottom).offset(bottomConstraint)
