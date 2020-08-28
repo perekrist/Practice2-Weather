@@ -11,17 +11,18 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    lazy var appCoordinator: AppCoordinator = {
-        return AppCoordinator(window: self.window)
-    }()
+    lazy var appCoordinator: AppCoordinator = makeAppCoordinator()
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        appCoordinator = AppCoordinator(window: window)
         appCoordinator.start()
         
         return true
+    }
+    
+    private func makeAppCoordinator() -> AppCoordinator {
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = window
+        return AppCoordinator(window: window)
     }
 }
