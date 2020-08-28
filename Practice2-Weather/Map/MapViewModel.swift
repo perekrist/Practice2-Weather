@@ -39,7 +39,6 @@ class MapViewModel {
                 SVProgressHUD.dismiss()
                 self.error = error.localizedDescription
                 self.onDidError?()
-//                self.selectedCity = nil
             }
         }
     }
@@ -57,7 +56,6 @@ class MapViewModel {
                 SVProgressHUD.dismiss()
                 self.error = error.localizedDescription
                 self.onDidError?()
-//                self.selectedCoordinate = nil
             }
         }
     }
@@ -72,7 +70,6 @@ extension MapViewModel: MapPickViewModelDelegate {
         self.selectedCoordinate = nil
         self.selectedCity = nil
         self.onDidUpdate?()
-        print("close")
     }
     
     func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {

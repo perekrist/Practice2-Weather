@@ -52,6 +52,7 @@ extension MapViewController {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
             guard let cityName = self.viewModel.selectedCity else {
+                self.mapView?.removeAnnotations(self.mapView?.annotations ?? [])
                 self.closeMapPickView()
                 return
             }
