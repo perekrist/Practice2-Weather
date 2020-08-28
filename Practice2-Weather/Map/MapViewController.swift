@@ -16,6 +16,9 @@ class MapViewController: UIViewController {
     private var mapView: MKMapView?
     private var mapPickView: MapPickView?
     
+    var openBottomConstraint: Constraint?
+    var closeBottomConstraint: Constraint?
+    
     var timer: Timer?
     
     init(viewModel: MapViewModel) {
@@ -51,7 +54,6 @@ extension MapViewController {
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
-            print("city: " + (self.viewModel.selectedCity ??  "-"))
             guard let cityName = self.viewModel.selectedCity else {
                 self.closeMapPickView()
                 return
@@ -76,8 +78,8 @@ extension MapViewController {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.barTintColor = UIColor.white
-        navigationItem.title = Constants.navBarTitle
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: Constants.backButtonTitle, style: .plain, target: nil, action: nil)
+        navigationItem.title = R.string.map.navBarTitle()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: R.string.weather.backButtonTitle(), style: .plain, target: nil, action: nil)
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -123,8 +125,8 @@ extension MapViewController {
     }
     
     private func showError(_ error: String) {
-        let alert = UIAlertController(title: "An error has occurred", message: error, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let alert = UIAlertController(title: R.string.common.errorTitle(), message: error, preferredStyle: .alert)
+        let action = UIAlertAction(title: R.string.common.okTitle(), style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }

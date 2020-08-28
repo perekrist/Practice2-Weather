@@ -12,5 +12,6 @@ target 'Practice2-Weather' do
   pod 'SwiftLint'
   pod 'Alamofire'
   pod 'Kingfisher'
+  pod 'R.swift'
 
 end

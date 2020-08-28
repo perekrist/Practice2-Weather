@@ -27,6 +27,10 @@
 		CAFA13CB24EFA47B001A0EDB /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CA24EFA47B001A0EDB /* Api.swift */; };
 		CAFA13CD24EFA818001A0EDB /* ApiNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */; };
 		CAFA13D024EFAD08001A0EDB /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CF24EFAD08001A0EDB /* Weather.swift */; };
+		CAFA9A2E24F8E6730080AE1F /* Map.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A2D24F8E6730080AE1F /* Map.strings */; };
+		CAFA9A3024F8E6820080AE1F /* Weather.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A2F24F8E6820080AE1F /* Weather.strings */; };
+		CAFA9A3224F8E69A0080AE1F /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A3124F8E69A0080AE1F /* Common.strings */; };
+		CAFA9A3D24F8F4430080AE1F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A3C24F8F4430080AE1F /* R.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +57,10 @@
 		CAFA13CA24EFA47B001A0EDB /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiNetworkingService.swift; sourceTree = "<group>"; };
 		CAFA13CF24EFAD08001A0EDB /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		CAFA9A2D24F8E6730080AE1F /* Map.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Map.strings; sourceTree = "<group>"; };
+		CAFA9A2F24F8E6820080AE1F /* Weather.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Weather.strings; sourceTree = "<group>"; };
+		CAFA9A3124F8E69A0080AE1F /* Common.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Common.strings; sourceTree = "<group>"; };
+		CAFA9A3C24F8F4430080AE1F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		FFED2C848DF916DFC899D400 /* Pods-Practice2-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practice2-Weather.release.xcconfig"; path = "Target Support Files/Pods-Practice2-Weather/Pods-Practice2-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +115,7 @@
 		CA6DFC0324D2AABC001F65B7 = {
 			isa = PBXGroup;
 			children = (
+				CAFA9A3B24F8F4430080AE1F /* Resources */,
 				CA6DFC0E24D2AABC001F65B7 /* Practice2-Weather */,
 				CA6DFC0D24D2AABC001F65B7 /* Products */,
 				DE0E318F38E13398FFF40586 /* Pods */,
@@ -125,13 +134,13 @@
 		CA6DFC0E24D2AABC001F65B7 /* Practice2-Weather */ = {
 			isa = PBXGroup;
 			children = (
+				CAFA9A2C24F8E6490080AE1F /* Resources */,
 				CAFA13CE24EFACF2001A0EDB /* Models */,
 				CA010B6224E4292700F04910 /* Values */,
 				CA010B5F24E4285E00F04910 /* Services */,
 				CA6DFC3324D3E6ED001F65B7 /* Extensions */,
 				CA4429D824E95CCF00BE363A /* Weather */,
 				CA6DFC2B24D2B3E3001F65B7 /* Map */,
-				CA6DFC1824D2AAC2001F65B7 /* Assets.xcassets */,
 				CA6DFC1A24D2AAC2001F65B7 /* LaunchScreen.storyboard */,
 				CA6DFC1D24D2AAC2001F65B7 /* Info.plist */,
 				CA6DFC0F24D2AABC001F65B7 /* AppDelegate.swift */,
@@ -177,6 +186,33 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CAFA9A2C24F8E6490080AE1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CA6DFC1824D2AAC2001F65B7 /* Assets.xcassets */,
+				CAFA9A3324F8E6BE0080AE1F /* Strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CAFA9A3324F8E6BE0080AE1F /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				CAFA9A2D24F8E6730080AE1F /* Map.strings */,
+				CAFA9A2F24F8E6820080AE1F /* Weather.strings */,
+				CAFA9A3124F8E69A0080AE1F /* Common.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		CAFA9A3B24F8F4430080AE1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CAFA9A3C24F8F4430080AE1F /* R.generated.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		DE0E318F38E13398FFF40586 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +230,7 @@
 			buildConfigurationList = CA6DFC2024D2AAC2001F65B7 /* Build configuration list for PBXNativeTarget "Practice2-Weather" */;
 			buildPhases = (
 				93CB355681342938867AB161 /* [CP] Check Pods Manifest.lock */,
+				CAFA9A3424F8E7930080AE1F /* ShellScript */,
 				CA010B6A24E42DF000F04910 /* ShellScript */,
 				CA6DFC0824D2AABC001F65B7 /* Sources */,
 				CA6DFC0924D2AABC001F65B7 /* Frameworks */,
@@ -247,8 +284,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAFA9A3224F8E69A0080AE1F /* Common.strings in Resources */,
 				CA6DFC1C24D2AAC2001F65B7 /* LaunchScreen.storyboard in Resources */,
 				CA6DFC1924D2AAC2001F65B7 /* Assets.xcassets in Resources */,
+				CAFA9A2E24F8E6730080AE1F /* Map.strings in Resources */,
+				CAFA9A3024F8E6820080AE1F /* Weather.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +351,25 @@
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
+		CAFA9A3424F8E7930080AE1F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/Resources/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Resources/R.generated.swift\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -329,6 +388,7 @@
 				CA6DFC2624D2B271001F65B7 /* Coordinator.swift in Sources */,
 				CAFA13CD24EFA818001A0EDB /* ApiNetworkingService.swift in Sources */,
 				CA6DFC2D24D2B414001F65B7 /* MapCoordinator.swift in Sources */,
+				CAFA9A3D24F8F4430080AE1F /* R.generated.swift in Sources */,
 				CA6DFC3024D2EB84001F65B7 /* MapPickView.swift in Sources */,
 				CAFA13CB24EFA47B001A0EDB /* Api.swift in Sources */,
 				CA6DFC1024D2AABC001F65B7 /* AppDelegate.swift in Sources */,

@@ -85,7 +85,7 @@ extension MapPickView {
         closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         closeButton.addTarget(self, action: #selector(closeMapPickView), for: .touchUpInside)
         
-        showWeatherButton.setTitle("Show Weather", for: .normal)
+        showWeatherButton.setTitle(R.string.map.showWeatherButtonTitle(), for: .normal)
         showWeatherButton.tintColor = #colorLiteral(red: 0.1564054489, green: 0.5728738904, blue: 0.9122014046, alpha: 1)
         showWeatherButton.titleLabel?.font = showWeatherButton.titleLabel?.font.withSize(16)
         showWeatherButton.layer.cornerRadius = 20

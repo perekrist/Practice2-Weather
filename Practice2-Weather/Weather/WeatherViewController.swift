@@ -74,8 +74,8 @@ extension WeatherViewController {
             self.pressureLabel.text = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
             
             let imageName = weatherForecast?.weather.first?.description.lowercased()
-            self.setupImageView("rain")
-            self.setupImageView(imageName ?? "rain")
+            self.weatherImageLarge.image = R.image.clearSky()
+            self.setupImageView(imageName ?? "")
             
             let url = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
             self.weatherImage.kf.setImage(with: url)
@@ -95,28 +95,28 @@ extension WeatherViewController {
         tempLabel.font = .boldSystemFont(ofSize: 120)
         
         celsius.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        celsius.text = "°C"
+        celsius.text = R.string.weather.celsius()
         celsius.font = .systemFont(ofSize: 50)
         
         
         weatherLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         weatherLabel.font = .systemFont(ofSize: 18)
         
-        humidity.text = "HUMIDITY"
+        humidity.text = R.string.weather.humiditY()
         humidity.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         humidity.font = .systemFont(ofSize: 18)
         
         humidityLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         humidityLabel.font = .boldSystemFont(ofSize: 18)
         
-        wind.text = "WIND"
+        wind.text = R.string.weather.winD()
         wind.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         wind.font = .systemFont(ofSize: 18)
         
         windLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         windLabel.font = .boldSystemFont(ofSize: 18)
         
-        pressure.text = "PRESSURE"
+        pressure.text = R.string.weather.pressurE()
         pressure.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         pressure.font = .systemFont(ofSize: 18)
         
@@ -205,13 +205,13 @@ extension WeatherViewController {
     }
     
     private func setupImageView(_ imageName: String) {
-        guard let image = UIImage(named: imageName) else { return }
+        guard let image = UIImage(named: imageName.replacingOccurrences(of: " ", with: "-")) else { return }
         weatherImageLarge.image = image
     }
     
     private func showError(_ error: String) {
-        let alert = UIAlertController(title: "An error has occurred", message: error, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let alert = UIAlertController(title: R.string.common.errorTitle(), message: error, preferredStyle: .alert)
+        let action = UIAlertAction(title: R.string.common.okTitle(), style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
