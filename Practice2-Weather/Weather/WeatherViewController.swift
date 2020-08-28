@@ -80,6 +80,11 @@ extension WeatherViewController {
             let url = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
             self.weatherImage.kf.setImage(with: url)
         }
+        
+        viewModel.onDidError = { [weak self] in
+            guard let error = self?.viewModel.error else { return }
+            self?.showError(error)
+        }
     }
     
     private func setupLabels() {

@@ -24,6 +24,7 @@ class WeatherViewModel {
     var apiService: ApiNetworkingService?
     
     var onDidUpdate: (() -> Void)?
+    var onDidError: (() -> Void)?
     
     init(city: String) {
         self.cityName = city
@@ -40,7 +41,8 @@ class WeatherViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                print(error)
+                self.error = error.localizedDescription
+                self.onDidError?()
             }
         }
     }

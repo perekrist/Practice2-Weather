@@ -12,7 +12,8 @@ import MapKit
 class GeoCodingService {
     func cityFromCoordinates(coordinate: CLLocationCoordinate2D, completion: @escaping (Result<CLPlacemark?, Error>) -> Void) {
         CLGeocoder()
-            .reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { placemarks, error in
+            .reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude,
+                                               longitude: coordinate.longitude)) { placemarks, error in
                 if let error = error {
                     completion(.failure(error))
                     return
