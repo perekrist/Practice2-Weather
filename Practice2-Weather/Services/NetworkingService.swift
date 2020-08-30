@@ -11,7 +11,6 @@ import Alamofire
 
 enum ApiErrors: Error {
     case badCityError
-    case cityNotFound
     case serverError
 }
 
@@ -19,11 +18,9 @@ extension ApiErrors: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .badCityError:
-            return "Can't get weather for current city"
-        case .cityNotFound:
-            return "City not found"
+            return "Can't get weather for current city."
         case .serverError:
-            return "Ooups, there is some problems on the server side! Try again later."
+            return "Server side problems, try again later."
         }
     }
 }
@@ -39,12 +36,12 @@ class NetworkingService {
                     let decodedData = try decoder.decode(T.self, from: data)
                     completion(Swift.Result.success(decodedData))
                     
-                } catch let error {
-                    completion(Swift.Result.failure(error))
+                } catch {
+                    completion(Swift.Result.failure(ApiErrors.badCityError))
                     return
                 }
-            case .failure(let error):
-                completion(.failure(error))
+            case .failure:
+                completion(.failure(ApiErrors.serverError))
             }
         }
         
@@ -61,21 +58,6 @@ class NetworkingService {
         
         baseRequest(url: url, method: .get, params: params) { result in
             completion(result)
-        }
-    }
-    
-    private func handleError(statusCode: Int?) -> Error {
-        guard let statusCode = statusCode else {
-            return ApiErrors.badCityError
-        }
-        
-        switch statusCode {
-        case 400...499:
-            return ApiErrors.cityNotFound
-        case 500...526:
-            return ApiErrors.serverError
-        default:
-            return ApiErrors.badCityError
         }
     }
 }

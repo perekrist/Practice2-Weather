@@ -25,7 +25,7 @@
 		CA6DFC3224D2EBAC001F65B7 /* MapPickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC3124D2EBAC001F65B7 /* MapPickViewModel.swift */; };
 		CA6DFC3524D3E763001F65B7 /* CoordinateToDMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */; };
 		CAFA13CB24EFA47B001A0EDB /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CA24EFA47B001A0EDB /* Api.swift */; };
-		CAFA13CD24EFA818001A0EDB /* ApiNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */; };
+		CAFA13CD24EFA818001A0EDB /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CC24EFA818001A0EDB /* NetworkingService.swift */; };
 		CAFA13D024EFAD08001A0EDB /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA13CF24EFAD08001A0EDB /* Weather.swift */; };
 		CAFA9A2E24F8E6730080AE1F /* Map.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A2D24F8E6730080AE1F /* Map.strings */; };
 		CAFA9A3024F8E6820080AE1F /* Weather.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A2F24F8E6820080AE1F /* Weather.strings */; };
@@ -55,7 +55,7 @@
 		CA6DFC3124D2EBAC001F65B7 /* MapPickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickViewModel.swift; sourceTree = "<group>"; };
 		CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateToDMS.swift; sourceTree = "<group>"; };
 		CAFA13CA24EFA47B001A0EDB /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiNetworkingService.swift; sourceTree = "<group>"; };
+		CAFA13CC24EFA818001A0EDB /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		CAFA13CF24EFAD08001A0EDB /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		CAFA9A2D24F8E6730080AE1F /* Map.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Map.strings; sourceTree = "<group>"; };
 		CAFA9A2F24F8E6820080AE1F /* Weather.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Weather.strings; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				CA010B6024E4288A00F04910 /* GeoCodingService.swift */,
-				CAFA13CC24EFA818001A0EDB /* ApiNetworkingService.swift */,
+				CAFA13CC24EFA818001A0EDB /* NetworkingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -386,7 +386,7 @@
 				CA6DFC2A24D2B3D0001F65B7 /* MapViewModel.swift in Sources */,
 				CA6DFC3224D2EBAC001F65B7 /* MapPickViewModel.swift in Sources */,
 				CA6DFC2624D2B271001F65B7 /* Coordinator.swift in Sources */,
-				CAFA13CD24EFA818001A0EDB /* ApiNetworkingService.swift in Sources */,
+				CAFA13CD24EFA818001A0EDB /* NetworkingService.swift in Sources */,
 				CA6DFC2D24D2B414001F65B7 /* MapCoordinator.swift in Sources */,
 				CAFA9A3D24F8F4430080AE1F /* R.generated.swift in Sources */,
 				CA6DFC3024D2EB84001F65B7 /* MapPickView.swift in Sources */,

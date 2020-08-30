@@ -21,14 +21,14 @@ class WeatherViewModel {
     
     var weatherForecast: Weather?
     
-    var apiService: ApiNetworkingService?
+    var apiService: NetworkingService?
     
     var onDidUpdate: (() -> Void)?
     var onDidError: (() -> Void)?
     
     init(city: String) {
         self.cityName = city
-        apiService = ApiNetworkingService()
+        apiService = NetworkingService()
     }
     
     func getWeather() {
