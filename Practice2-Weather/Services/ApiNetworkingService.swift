@@ -10,22 +10,16 @@ import Foundation
 import Alamofire
 
 class ApiNetworkingService {
-    func getWeatherByCity(city: String, completion: @escaping (Swift.Result<Weather, Error>) -> Void) {
-        let url = Constants.apiUrl
-        
-        let params = [
-            "q": city,
-            "units": "metric",
-            "appid": Api.key
-        ]
-        
-        AF.request(url, method: .get, parameters: params).responseData { response in
+    public func baseRequest<T: Decodable>(url: String, method: HTTPMethod, params: Parameters?,
+                                          completion: @escaping (Swift.Result<T, Error>) -> Void) {
+        AF.request(url, method: method, parameters: params).responseData { response in
             switch response.result {
             case .success(let data):
                 let decoder = JSONDecoder()
                 do {
-                    let decodedData = try decoder.decode(Weather.self, from: data)
+                    let decodedData = try decoder.decode(T.self, from: data)
                     completion(Swift.Result.success(decodedData))
+                    
                 } catch let error {
                     completion(Swift.Result.failure(error))
                     return
@@ -35,5 +29,19 @@ class ApiNetworkingService {
             }
         }
         
+    }
+    
+    func getWeatherByCity(city: String, completion: @escaping (Swift.Result<Weather, Error>) -> Void) {
+        let url = Constants.apiUrl
+        
+        let params = [
+            "q": city,
+            "units": "metric",
+            "appid": Api.key
+        ]
+        
+        baseRequest(url: url, method: .get, params: params) { result in
+            completion(result)
+        }
     }
 }
