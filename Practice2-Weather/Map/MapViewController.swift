@@ -83,6 +83,12 @@ extension MapViewController {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
+        
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.navigationController?.navigationBar.layer.shadowRadius = 16.0
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.310066
+        self.navigationController?.navigationBar.layer.masksToBounds = false
     }
     
     private func configureMapView() {

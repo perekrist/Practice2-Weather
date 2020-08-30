@@ -26,7 +26,6 @@ class ApiNetworkingService {
                 do {
                     let decodedData = try decoder.decode(Weather.self, from: data)
                     completion(Swift.Result.success(decodedData))
-                    print(data)
                 } catch let error {
                     completion(Swift.Result.failure(error))
                     return
