@@ -65,11 +65,7 @@ extension MapPickView {
         }
     
         self.layer.cornerRadius = 10
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        self.layer.shadowRadius = 16.0
-        self.layer.shadowOpacity = 0.310066
-        self.layer.masksToBounds = false
+        self.layer.setStandartShadow()
     }
     
     private func setupLabels() {

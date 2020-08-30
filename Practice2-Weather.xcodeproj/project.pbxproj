@@ -31,6 +31,7 @@
 		CAFA9A3024F8E6820080AE1F /* Weather.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A2F24F8E6820080AE1F /* Weather.strings */; };
 		CAFA9A3224F8E69A0080AE1F /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A3124F8E69A0080AE1F /* Common.strings */; };
 		CAFA9A3D24F8F4430080AE1F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A3C24F8F4430080AE1F /* R.generated.swift */; };
+		CAFA9A3F24FC15A50080AE1F /* StandartShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A3E24FC15A50080AE1F /* StandartShadow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		CAFA9A2F24F8E6820080AE1F /* Weather.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Weather.strings; sourceTree = "<group>"; };
 		CAFA9A3124F8E69A0080AE1F /* Common.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Common.strings; sourceTree = "<group>"; };
 		CAFA9A3C24F8F4430080AE1F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		CAFA9A3E24FC15A50080AE1F /* StandartShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartShadow.swift; sourceTree = "<group>"; };
 		FFED2C848DF916DFC899D400 /* Pods-Practice2-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practice2-Weather.release.xcconfig"; path = "Target Support Files/Pods-Practice2-Weather/Pods-Practice2-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */,
+				CAFA9A3E24FC15A50080AE1F /* StandartShadow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				CA6DFC1024D2AABC001F65B7 /* AppDelegate.swift in Sources */,
 				CA4429DE24E95D2F00BE363A /* WeatherViewController.swift in Sources */,
 				CA6DFC2824D2B3BE001F65B7 /* MapViewController.swift in Sources */,
+				CAFA9A3F24FC15A50080AE1F /* StandartShadow.swift in Sources */,
 				CA4429DA24E95CFC00BE363A /* WeatherCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
