@@ -21,7 +21,7 @@ class WeatherViewModel {
     
     var weatherForecast: Weather?
     
-    var apiService: NetworkingService?
+    var apiService: NetworkingService
     
     var onDidUpdate: (() -> Void)?
     var onDidError: (() -> Void)?
@@ -33,7 +33,7 @@ class WeatherViewModel {
     
     func getWeather() {
         SVProgressHUD.show()
-        apiService!.getWeatherByCity(city: cityName) { result in
+        apiService.getWeatherByCity(city: cityName) { result in
             switch result {
             case .success(let weather):
                 SVProgressHUD.dismiss()

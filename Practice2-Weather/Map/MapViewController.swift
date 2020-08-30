@@ -13,8 +13,8 @@ import SnapKit
 class MapViewController: UIViewController {
     private let viewModel: MapViewModel
     
-    private var mapView: MKMapView?
-    private var mapPickView: MapPickView?
+    private var mapView = MKMapView()
+    private var mapPickView = MapPickView()
     
     var timer: Timer?
     
@@ -52,18 +52,18 @@ extension MapViewController {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
             guard let cityName = self.viewModel.selectedCity else {
-                self.mapView?.removeAnnotations(self.mapView?.annotations ?? [])
+                self.mapView.removeAnnotations(self.mapView.annotations)
                 self.closeMapPickView()
                 return
             }
-            self.mapPickView?.coordinateLabel.text = self.viewModel.selectedCoordinate?.dms
-            self.mapPickView?.cityLabel.text = cityName
+            self.mapPickView.coordinateLabel.text = self.viewModel.selectedCoordinate?.dms
+            self.mapPickView.cityLabel.text = cityName
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = self.viewModel.selectedCoordinate!
-            self.mapView!.removeAnnotations(self.mapView!.annotations)
-            self.mapView!.addAnnotation(annotation)
-            self.mapView!.setCenter(self.viewModel.selectedCoordinate!, animated: true)
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            self.mapView.addAnnotation(annotation)
+            self.mapView.setCenter(self.viewModel.selectedCoordinate!, animated: true)
             
             self.showMapPickView()
         }
@@ -77,7 +77,10 @@ extension MapViewController {
     private func setupNavigationBar() {
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationItem.title = R.string.map.navBarTitle()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: R.string.weather.backButtonTitle(), style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: R.string.weather.backButtonTitle(),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -92,20 +95,19 @@ extension MapViewController {
     }
     
     private func configureMapView() {
-        mapView = MKMapView()
-        view.addSubview(mapView!)
+        view.addSubview(mapView)
         
         let coordinate = Constants.startCoordinates
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapRecognizer))
         gestureRecognizer.delegate = self
-        mapView!.addGestureRecognizer(gestureRecognizer)
-        mapView!.setCenter(coordinate, animated: true)
-        mapView!.mapType = .mutedStandard
+        mapView.addGestureRecognizer(gestureRecognizer)
+        mapView.setCenter(coordinate, animated: true)
+        mapView.mapType = .mutedStandard
     }
     
     private func setupMapView() {
-        mapView!.snp.makeConstraints { make in
+        mapView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
             make.trailing.equalTo(view.snp.trailing)
             make.leading.equalTo(view.snp.leading)
@@ -114,14 +116,13 @@ extension MapViewController {
     }
     
     private func configureMapPickView() {
-        mapPickView = MapPickView()
         let mapPickViewModel = MapPickViewModel(delegate: viewModel)
-        mapPickView!.setup(with: mapPickViewModel)
-        view.addSubview(mapPickView!)
+        mapPickView.setup(with: mapPickViewModel)
+        view.addSubview(mapPickView)
     }
     
     private func setupMapPickView(bottomConstraint: Int) {
-        mapPickView?.snp.remakeConstraints { make in
+        mapPickView.snp.remakeConstraints { make in
             make.trailing.equalTo(view.snp.trailing).offset(-16)
             make.leading.equalTo(view.snp.leading).offset(16)
             make.bottom.equalTo(view.snp.bottom).offset(bottomConstraint)
@@ -141,7 +142,7 @@ extension MapViewController: UIGestureRecognizerDelegate {
     @objc func mapTapRecognizer(sender: UIGestureRecognizer) {
         
         let location = sender.location(in: mapView)
-        let coordinate = mapView!.convert(location, toCoordinateFrom: mapView)
+        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
         
         viewModel.selectedCoordinate = coordinate
         viewModel.geocodeCityFromCoordinate(coordinate: coordinate)

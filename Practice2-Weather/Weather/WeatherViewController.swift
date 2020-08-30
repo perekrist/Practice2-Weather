@@ -70,7 +70,8 @@ extension WeatherViewController {
             self.tempLabel.text = String(Int((weatherForecast?.main.temp) ?? 0))
             self.weatherLabel.text = weatherForecast?.weather.first?.main
             self.humidityLabel.text = "\(Double((weatherForecast?.main.humidity) ?? 0)) %"
-            self.windLabel.text = "\(self.viewModel.compassDirection(for: weatherForecast?.wind.deg ?? -1)) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
+            let windDirection = "\(self.viewModel.compassDirection(for: weatherForecast?.wind.deg ?? -1))"
+            self.windLabel.text = "\(windDirection) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
             self.pressureLabel.text = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
             
             let imageName = weatherForecast?.weather.first?.description.lowercased()
@@ -97,7 +98,6 @@ extension WeatherViewController {
         celsius.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         celsius.text = R.string.weather.celsius()
         celsius.font = .systemFont(ofSize: 50)
-        
         
         weatherLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         weatherLabel.font = .systemFont(ofSize: 18)

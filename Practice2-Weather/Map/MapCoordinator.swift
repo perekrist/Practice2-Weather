@@ -23,9 +23,16 @@ class MapCoordinator: Coordinator {
     }
 }
 
+extension MapCoordinator: WeatherCoordinatorDelegate {
+    func didFinish(from coordinator: WeatherCoordinator) {
+        removeChildCoordinator(coordinator)
+    }
+}
+
 extension MapCoordinator: MapViewModelDelegate {
     func mapViewModel(_ viewModel: MapViewModel, didRequestShowWeatherFor city: String) {
         let weatherCoordinator = WeatherCoordinator(rootViewController: self.rootViewController, city: city)
+        weatherCoordinator.delegate = self
         addChildCoordinator(weatherCoordinator)
         weatherCoordinator.start()
     }
