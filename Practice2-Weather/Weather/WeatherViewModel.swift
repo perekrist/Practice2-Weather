@@ -53,4 +53,8 @@ class WeatherViewModel {
         let index = Int((deg + 22.5) / 45.0) & 7
         return directions[index]
     }
+    
+    func goBack() {
+        delegate?.weatherViewModelDidFinish(self)
+    }
 }
