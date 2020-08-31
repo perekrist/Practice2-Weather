@@ -112,8 +112,7 @@ extension MapViewController {
     }
     
     private func configureMapPickView() {
-        let mapPickViewModel = MapPickViewModel(delegate: viewModel)
-        mapPickView.setup(with: mapPickViewModel)
+        mapPickView.setup(with: viewModel.mapPickViewModel!)
         view.addSubview(mapPickView)
     }
     

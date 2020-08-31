@@ -24,10 +24,16 @@ class MapViewModel {
     let startCoordinate = Constants.startCoordinates    
     private var searchItem: DispatchWorkItem?
     
+    var mapPickViewModel: MapPickViewModel?
+    
     var error = ""
     
     var onDidUpdate: (() -> Void)?
     var onDidError: (() -> Void)?
+    
+    init() {
+        mapPickViewModel = MapPickViewModel(delegate: self)
+    }
     
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
         SVProgressHUD.show()
