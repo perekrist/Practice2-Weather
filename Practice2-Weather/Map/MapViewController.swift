@@ -59,11 +59,11 @@ extension MapViewController {
             self.showError(error)
         }
         
-        viewModel.onDidStartRequest = { [] in
+        viewModel.onDidStartRequest = { [unowned self] in
             SVProgressHUD.show()
         }
         
-        viewModel.onDidFinishRequest = { [] in
+        viewModel.onDidFinishRequest = { [unowned self] in
             SVProgressHUD.dismiss()
         }
     }

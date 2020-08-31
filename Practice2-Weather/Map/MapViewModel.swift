@@ -20,7 +20,6 @@ class MapViewModel {
     
     var selectedCity: String?
     var selectedCoordinate: CLLocationCoordinate2D?
-//    var error = ""
     var mapPickViewModel: MapPickViewModel?
     
     var onDidUpdate: (() -> Void)?
@@ -47,7 +46,6 @@ class MapViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 self.onDidFinishRequest?()
-//                self.error = error.localizedDescription
                 self.onDidError?(error)
             }
         }
@@ -67,7 +65,6 @@ class MapViewModel {
                     self.onDidUpdate?()
                 case .failure(let error):
                     self.onDidFinishRequest?()
-//                    self.error = error.localizedDescription
                     self.onDidError?(error)
                 }
             }
