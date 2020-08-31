@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import SnapKit
+import SVProgressHUD
 
 class MapViewController: UIViewController {
     private let viewModel: MapViewModel
@@ -57,6 +58,14 @@ extension MapViewController {
         viewModel.onDidError = { [weak self] in
             guard let error = self?.viewModel.error else { return }
             self?.showError(error)
+        }
+        
+        viewModel.onDidStartRequest = { [] in
+            SVProgressHUD.show()
+        }
+        
+        viewModel.onDidFinishRequest = { [] in
+            SVProgressHUD.dismiss()
         }
     }
     
