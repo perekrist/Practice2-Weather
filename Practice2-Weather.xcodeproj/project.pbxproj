@@ -32,6 +32,7 @@
 		CAFA9A3224F8E69A0080AE1F /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAFA9A3124F8E69A0080AE1F /* Common.strings */; };
 		CAFA9A3D24F8F4430080AE1F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A3C24F8F4430080AE1F /* R.generated.swift */; };
 		CAFA9A3F24FC15A50080AE1F /* StandartShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A3E24FC15A50080AE1F /* StandartShadow.swift */; };
+		CAFA9A4124FCD8140080AE1F /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFA9A4024FCD8140080AE1F /* ErrorAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		CAFA9A3124F8E69A0080AE1F /* Common.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Common.strings; sourceTree = "<group>"; };
 		CAFA9A3C24F8F4430080AE1F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CAFA9A3E24FC15A50080AE1F /* StandartShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartShadow.swift; sourceTree = "<group>"; };
+		CAFA9A4024FCD8140080AE1F /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		FFED2C848DF916DFC899D400 /* Pods-Practice2-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Practice2-Weather.release.xcconfig"; path = "Target Support Files/Pods-Practice2-Weather/Pods-Practice2-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +179,7 @@
 			children = (
 				CA6DFC3424D3E763001F65B7 /* CoordinateToDMS.swift */,
 				CAFA9A3E24FC15A50080AE1F /* StandartShadow.swift */,
+				CAFA9A4024FCD8140080AE1F /* ErrorAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA6DFC3524D3E763001F65B7 /* CoordinateToDMS.swift in Sources */,
+				CAFA9A4124FCD8140080AE1F /* ErrorAlert.swift in Sources */,
 				CAFA13D024EFAD08001A0EDB /* Weather.swift in Sources */,
 				CA4429DC24E95D1B00BE363A /* WeatherViewModel.swift in Sources */,
 				CA010B6424E4294500F04910 /* Constants.swift in Sources */,

@@ -55,9 +55,8 @@ extension MapViewController {
             self.updateViews()
         }
         
-        viewModel.onDidError = { [weak self] in
-            guard let error = self?.viewModel.error else { return }
-            self?.showError(error)
+        viewModel.onDidError = { error in
+            self.showError(error)
         }
         
         viewModel.onDidStartRequest = { [] in
@@ -132,14 +131,6 @@ extension MapViewController {
             make.bottom.equalTo(view.snp.bottom).offset(bottomConstraintOffset)
         }
     }
-    
-    private func showError(_ error: String) {
-        let alert = UIAlertController(title: R.string.common.errorTitle(), message: error, preferredStyle: .alert)
-        let action = UIAlertAction(title: R.string.common.okTitle(), style: .default, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
 }
 
 extension MapViewController: UIGestureRecognizerDelegate {
