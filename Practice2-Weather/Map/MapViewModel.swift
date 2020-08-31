@@ -21,6 +21,7 @@ class MapViewModel {
     var selectedCoordinate: CLLocationCoordinate2D?
     var geoCodingService = GeoCodingService()
     
+    let startCoordinate = Constants.startCoordinates    
     private var searchItem: DispatchWorkItem?
     
     var error = ""

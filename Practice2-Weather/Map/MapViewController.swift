@@ -41,37 +41,41 @@ class MapViewController: UIViewController {
 extension MapViewController {
     private func initialSetup() {
         view.backgroundColor = .white
-        bindToViewModel()
         setupNavigationBar()
-        configureMapView()
         setupMapView()
         configureMapPickView()
+        setupMapPickView(bottomConstraint: 170)
+        bindToViewModel()
     }
     
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
-            guard let cityName = self.viewModel.selectedCity else {
-                self.mapView.removeAnnotations(self.mapView.annotations)
-                self.closeMapPickView()
-                return
-            }
-            self.mapPickView.coordinateLabel.text = self.viewModel.selectedCoordinate?.dms
-            self.mapPickView.cityLabel.text = cityName
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = self.viewModel.selectedCoordinate!
-            self.mapView.removeAnnotations(self.mapView.annotations)
-            self.mapView.addAnnotation(annotation)
-            self.mapView.setCenter(self.viewModel.selectedCoordinate!, animated: true)
-            
-            self.showMapPickView()
+            self.updateViews()
         }
         
         viewModel.onDidError = { [weak self] in
             guard let error = self?.viewModel.error else { return }
             self?.showError(error)
         }
+    }
+    
+    private func  updateViews() {
+        guard let cityName = self.viewModel.selectedCity else {
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            self.closeMapPickView()
+            return
+        }
+        self.mapPickView.coordinateLabel.text = self.viewModel.selectedCoordinate?.dms
+        self.mapPickView.cityLabel.text = cityName
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = self.viewModel.selectedCoordinate!
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.mapView.addAnnotation(annotation)
+        self.mapView.setCenter(self.viewModel.selectedCoordinate!, animated: true)
+        
+        self.showMapPickView()
     }
     
     private func setupNavigationBar() {
@@ -90,19 +94,15 @@ extension MapViewController {
         self.navigationController?.navigationBar.layer.setStandartShadow()
     }
     
-    private func configureMapView() {
+    private func setupMapView() {
         view.addSubview(mapView)
-        
-        let coordinate = Constants.startCoordinates
         
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapRecognizer))
         gestureRecognizer.delegate = self
         mapView.addGestureRecognizer(gestureRecognizer)
-        mapView.setCenter(coordinate, animated: true)
+        mapView.setCenter(self.viewModel.startCoordinate, animated: true)
         mapView.mapType = .mutedStandard
-    }
-    
-    private func setupMapView() {
+        
         mapView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin)
             make.trailing.equalTo(view.snp.trailing)
