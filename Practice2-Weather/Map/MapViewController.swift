@@ -13,8 +13,8 @@ import SnapKit
 class MapViewController: UIViewController {
     private let viewModel: MapViewModel
     
-    private var mapView = MKMapView()
-    private var mapPickView = MapPickView()
+    private let mapView = MKMapView()
+    private let mapPickView = MapPickView()
     
     var timer: Timer?
     
@@ -150,10 +150,7 @@ extension MapViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else { return }
         guard !text.isEmpty else { return }
         
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-            self.viewModel.geocodeCoordinateFromCity(city: text)
-        })
+        self.viewModel.geocodeCoordinateFromCity(city: text)
     }
 }
 
