@@ -44,7 +44,7 @@ extension MapViewController {
         setupNavigationBar()
         setupMapView()
         configureMapPickView()
-        setupMapPickView(bottomConstraint: 170)
+        setupMapPickView(bottomConstraintOffset: 170)
         bindToViewModel()
     }
     
@@ -63,7 +63,7 @@ extension MapViewController {
     private func  updateViews() {
         guard let cityName = self.viewModel.selectedCity else {
             self.mapView.removeAnnotations(self.mapView.annotations)
-            self.closeMapPickView()
+            self.changeMapPickView(isOpen: false)
             return
         }
         self.mapPickView.coordinateLabel.text = self.viewModel.selectedCoordinate?.dms
@@ -75,7 +75,7 @@ extension MapViewController {
         self.mapView.addAnnotation(annotation)
         self.mapView.setCenter(self.viewModel.selectedCoordinate!, animated: true)
         
-        self.showMapPickView()
+        self.changeMapPickView(isOpen: true)
     }
     
     private func setupNavigationBar() {
@@ -116,11 +116,11 @@ extension MapViewController {
         view.addSubview(mapPickView)
     }
     
-    private func setupMapPickView(bottomConstraint: Int) {
+    private func setupMapPickView(bottomConstraintOffset: Int) {
         mapPickView.snp.remakeConstraints { make in
             make.trailing.equalTo(view.snp.trailing).offset(-16)
             make.leading.equalTo(view.snp.leading).offset(16)
-            make.bottom.equalTo(view.snp.bottom).offset(bottomConstraint)
+            make.bottom.equalTo(view.snp.bottom).offset(bottomConstraintOffset)
         }
     }
     
@@ -154,16 +154,13 @@ extension MapViewController: UISearchResultsUpdating {
 }
 
 extension MapViewController {
-    private func showMapPickView() {
+    private func changeMapPickView(isOpen: Bool) {
+        if isOpen {
+            self.setupMapPickView(bottomConstraintOffset: -16)
+        } else {
+            self.setupMapPickView(bottomConstraintOffset: 170)
+        }
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.setupMapPickView(bottomConstraint: -16)
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    private func closeMapPickView() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.setupMapPickView(bottomConstraint: 170)
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
