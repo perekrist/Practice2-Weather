@@ -14,6 +14,12 @@ enum ApiErrors: Error {
     case serverError
 }
 
+struct Keys {
+    static let query = "q"
+    static let units = "units"
+    static let appid = "appid"
+}
+
 extension ApiErrors: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -51,9 +57,9 @@ class NetworkingService {
         let url = Constants.apiUrl
         
         let params = [
-            "q": city,
-            "units": "metric",
-            "appid": Api.key
+            Keys.query: city,
+            Keys.units: R.string.weather.units(),
+            Keys.appid: Api.key
         ]
         
         baseRequest(url: url, method: .get, params: params) { result in
