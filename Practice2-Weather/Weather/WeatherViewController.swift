@@ -82,9 +82,9 @@ extension WeatherViewController {
             self.weatherImage.kf.setImage(with: url)
         }
         
-        viewModel.onDidError = { [weak self] in
-            guard let error = self?.viewModel.error else { return }
-            self?.showError(error)
+        viewModel.onDidError = { [weak self] error in
+            guard let self = self else { return }
+            self.showError(error)
         }
     }
     

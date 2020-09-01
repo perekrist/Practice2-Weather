@@ -14,17 +14,16 @@ protocol WeatherViewModelDelegate: class {
 }
 
 class WeatherViewModel {
-    weak var delegate: WeatherViewModelDelegate?
-    
-    var error = ""
     let cityName: String
+    
+    weak var delegate: WeatherViewModelDelegate?
     
     var weatherForecast: Weather?
     
-    var apiService: NetworkingService
-    
     var onDidUpdate: (() -> Void)?
-    var onDidError: (() -> Void)?
+    var onDidError: ((Error) -> Void)?
+    
+    private var apiService: NetworkingService
     
     init(city: String) {
         self.cityName = city
@@ -41,8 +40,7 @@ class WeatherViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                self.error = error.localizedDescription
-                self.onDidError?()
+                self.onDidError?(error)
             }
         }
     }
