@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol WeatherCoordinatorDelegate: class {
+protocol WeatherCoordinatorOutput: class {
     func didFinish(from coordinator: WeatherCoordinator)
 }
 
 class WeatherCoordinator: Coordinator {
-    weak var delegate: WeatherCoordinatorDelegate?
-    let rootViewController: UINavigationController
-    let city: String
+    weak var delegate: WeatherCoordinatorOutput?
+    private let rootViewController: UINavigationController
+    private let city: String
     
     init(rootViewController: UINavigationController, city: String) {
         self.rootViewController = rootViewController
