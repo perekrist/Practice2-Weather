@@ -20,6 +20,9 @@ class WeatherViewModel {
     var wind: String = ""
     var pressure: String = ""
     
+    var imageName: String = ""
+    var imageURL: URL?
+    
     weak var delegate: WeatherViewModelDelegate?
     
     var error = ""
@@ -61,6 +64,9 @@ class WeatherViewModel {
         let windDirection = "\(compassDirection(for: weatherForecast?.wind.deg ?? -1))"
         self.wind = "\(windDirection) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
         self.pressure = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
+        self.imageName = (weatherForecast?.weather.first?.description.lowercased() ?? "") as String
+        self.imageURL = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
+        
     }
     
     func compassDirection(for deg: Double) -> String {

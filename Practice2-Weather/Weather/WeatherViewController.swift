@@ -65,7 +65,6 @@ extension WeatherViewController {
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
-            let weatherForecast = self.viewModel.weatherForecast
             self.cityLabel.text = self.viewModel.cityName
             self.tempLabel.text = self.viewModel.weatherDegree
             self.weatherLabel.text = self.viewModel.weatherDescription
@@ -73,12 +72,8 @@ extension WeatherViewController {
             self.windLabel.text = self.viewModel.wind
             self.pressureLabel.text = self.viewModel.pressure
             
-            let imageName = weatherForecast?.weather.first?.description.lowercased()
-            self.weatherImageLarge.image = R.image.clearSky()
-            self.setupImageView(imageName ?? "")
-            
-            let url = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
-            self.weatherImage.kf.setImage(with: url)
+            self.setupImageView(self.viewModel.imageName)
+            self.weatherImage.kf.setImage(with: self.viewModel.imageURL)
         }
         
         viewModel.onDidError = { [weak self] in
@@ -204,6 +199,7 @@ extension WeatherViewController {
     }
     
     private func setupImageView(_ imageName: String) {
+        self.weatherImageLarge.image = R.image.clearSky()
         guard let image = UIImage(named: imageName.replacingOccurrences(of: " ", with: "-")) else { return }
         weatherImageLarge.image = image
     }
