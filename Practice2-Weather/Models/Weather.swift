@@ -31,4 +31,3 @@ struct WeatherWind: Codable {
     let speed: Double
     let deg: Double
 }
-

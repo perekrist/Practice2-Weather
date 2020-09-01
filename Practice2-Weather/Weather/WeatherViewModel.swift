@@ -21,19 +21,19 @@ class WeatherViewModel {
     
     var weatherForecast: Weather?
     
-    var apiService: ApiNetworkingService?
+    var apiService: NetworkingService
     
     var onDidUpdate: (() -> Void)?
     var onDidError: (() -> Void)?
     
     init(city: String) {
         self.cityName = city
-        apiService = ApiNetworkingService()
+        apiService = NetworkingService()
     }
     
     func getWeather() {
         SVProgressHUD.show()
-        apiService!.getWeatherByCity(city: cityName) { result in
+        apiService.getWeatherByCity(city: cityName) { result in
             switch result {
             case .success(let weather):
                 SVProgressHUD.dismiss()
@@ -52,5 +52,9 @@ class WeatherViewModel {
         let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
         let index = Int((deg + 22.5) / 45.0) & 7
         return directions[index]
+    }
+    
+    func goBack() {
+        delegate?.weatherViewModelDidFinish(self)
     }
 }

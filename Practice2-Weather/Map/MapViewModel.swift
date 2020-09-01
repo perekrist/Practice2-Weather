@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-import SVProgressHUD
 
 protocol MapViewModelDelegate: class {
     func mapViewModel(_ viewModel: MapViewModel, didRequestShowWeatherFor city: String)
@@ -17,48 +16,61 @@ protocol MapViewModelDelegate: class {
 class MapViewModel {
     weak var delegate: MapViewModelDelegate?
     
+    let startCoordinate = Constants.startCoordinates
+    
     var selectedCity: String?
     var selectedCoordinate: CLLocationCoordinate2D?
-    var geoCodingService = GeoCodingService()
+    var mapPickViewModel: MapPickViewModel?
     
-    var error = ""
-        
     var onDidUpdate: (() -> Void)?
-    var onDidError: (() -> Void)?
-        
+    var onDidError: ((Error) -> Void)?
+    
+    var onDidStartRequest: (() -> Void)?
+    var onDidFinishRequest: (() -> Void)?
+    
+    private var geoCodingService = GeoCodingService()
+    private var searchItem: DispatchWorkItem?
+    
+    init() {
+        mapPickViewModel = MapPickViewModel(delegate: self)
+    }
+    
     func geocodeCityFromCoordinate(coordinate: CLLocationCoordinate2D) {
-        SVProgressHUD.show()
+        onDidStartRequest?()
         geoCodingService.cityFromCoordinates(coordinate: coordinate) { result in
             switch result {
             case .success(let placemark):
-                SVProgressHUD.dismiss()
+                self.onDidFinishRequest?()
                 self.selectedCity = placemark?.locality
                 self.selectedCoordinate = placemark?.location?.coordinate
                 self.onDidUpdate?()
             case .failure(let error):
-                SVProgressHUD.dismiss()
-                self.error = error.localizedDescription
-                self.onDidError?()
-//                self.selectedCity = nil
+                self.onDidFinishRequest?()
+                self.onDidError?(error)
             }
         }
     }
     
     func geocodeCoordinateFromCity(city: String) {
-        SVProgressHUD.show()
-        geoCodingService.coordinatesFromCity(city: city) { result in
-            switch result {
-            case .success(let placemark):
-                SVProgressHUD.dismiss()
-                self.selectedCity = placemark?.locality
-                self.selectedCoordinate = placemark?.location?.coordinate
-                self.onDidUpdate?()
-            case .failure(let error):
-                SVProgressHUD.dismiss()
-                self.error = error.localizedDescription
-                self.onDidError?()
-//                self.selectedCoordinate = nil
+        searchItem?.cancel()
+        searchItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.onDidStartRequest?()
+            self.geoCodingService.coordinatesFromCity(city: city) { result in
+                switch result {
+                case .success(let placemark):
+                    self.onDidFinishRequest?()
+                    self.selectedCity = placemark?.locality
+                    self.selectedCoordinate = placemark?.location?.coordinate
+                    self.onDidUpdate?()
+                case .failure(let error):
+                    self.onDidFinishRequest?()
+                    self.onDidError?(error)
+                }
             }
+        }
+        if let searchTask = searchItem {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: searchTask)
         }
     }
     
@@ -72,7 +84,6 @@ extension MapViewModel: MapPickViewModelDelegate {
         self.selectedCoordinate = nil
         self.selectedCity = nil
         self.onDidUpdate?()
-        print("close")
     }
     
     func mapPickViewModellDidTapShowWeather(_ viewModel: MapPickViewModel) {
