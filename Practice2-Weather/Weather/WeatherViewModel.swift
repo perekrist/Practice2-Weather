@@ -25,9 +25,9 @@ class WeatherViewModel {
     
     private var apiService: NetworkingService
     
-    init(city: String) {
+    init(city: String, apiService: NetworkingService) {
         self.cityName = city
-        apiService = NetworkingService()
+        self.apiService = apiService
     }
     
     func getWeather() {
