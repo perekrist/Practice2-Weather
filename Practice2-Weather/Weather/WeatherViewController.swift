@@ -67,12 +67,11 @@ extension WeatherViewController {
             guard let self = self else { return }
             let weatherForecast = self.viewModel.weatherForecast
             self.cityLabel.text = self.viewModel.cityName
-            self.tempLabel.text = String(Int((weatherForecast?.main.temp) ?? 0))
-            self.weatherLabel.text = weatherForecast?.weather.first?.main
-            self.humidityLabel.text = "\(Double((weatherForecast?.main.humidity) ?? 0)) %"
-            let windDirection = "\(self.viewModel.compassDirection(for: weatherForecast?.wind.deg ?? -1))"
-            self.windLabel.text = "\(windDirection) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
-            self.pressureLabel.text = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
+            self.tempLabel.text = self.viewModel.weatherDegree
+            self.weatherLabel.text = self.viewModel.weatherDescription
+            self.humidityLabel.text = self.viewModel.humidity
+            self.windLabel.text = self.viewModel.wind
+            self.pressureLabel.text = self.viewModel.pressure
             
             let imageName = weatherForecast?.weather.first?.description.lowercased()
             self.weatherImageLarge.image = R.image.clearSky()

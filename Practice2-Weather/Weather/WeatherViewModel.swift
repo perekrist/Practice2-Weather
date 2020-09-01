@@ -14,6 +14,12 @@ protocol WeatherViewModelDelegate: class {
 }
 
 class WeatherViewModel {
+    var weatherDegree: String = ""
+    var weatherDescription: String = ""
+    var humidity: String = ""
+    var wind: String = ""
+    var pressure: String = ""
+    
     weak var delegate: WeatherViewModelDelegate?
     
     var error = ""
@@ -38,6 +44,7 @@ class WeatherViewModel {
             case .success(let weather):
                 SVProgressHUD.dismiss()
                 self.weatherForecast = weather
+                self.updateLabels()
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
@@ -45,6 +52,15 @@ class WeatherViewModel {
                 self.onDidError?()
             }
         }
+    }
+    
+    private func updateLabels() {
+        self.weatherDegree = String(Int((weatherForecast?.main.temp) ?? 0))
+        self.weatherDescription = (weatherForecast?.weather.first?.main ?? "-") as String
+        self.humidity = "\(Double((weatherForecast?.main.humidity) ?? 0)) %"
+        let windDirection = "\(compassDirection(for: weatherForecast?.wind.deg ?? -1))"
+        self.wind = "\(windDirection) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
+        self.pressure = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
     }
     
     func compassDirection(for deg: Double) -> String {
