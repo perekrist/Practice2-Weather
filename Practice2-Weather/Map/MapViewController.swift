@@ -55,7 +55,8 @@ extension MapViewController {
             self.updateViews()
         }
         
-        viewModel.onDidError = { error in
+        viewModel.onDidError = { [weak self] error in
+            guard let self = self else { return }
             self.showError(error)
         }
         
