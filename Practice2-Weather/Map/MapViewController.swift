@@ -98,9 +98,7 @@ extension MapViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
-        
-        self.navigationController?.navigationBar.layer.setStandartShadow()
+        navigationItem.searchController = searchController        
     }
     
     private func setupMapView() {
