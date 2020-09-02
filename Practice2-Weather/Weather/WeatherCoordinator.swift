@@ -14,8 +14,10 @@ protocol WeatherCoordinatorDelegate: class {
 
 class WeatherCoordinator: Coordinator {
     weak var delegate: WeatherCoordinatorDelegate?
-    let rootViewController: UINavigationController
-    let city: String
+    
+    private let rootViewController: UINavigationController
+    private let city: String
+    private let apiService = NetworkingService()
     
     init(rootViewController: UINavigationController, city: String) {
         self.rootViewController = rootViewController
@@ -23,7 +25,7 @@ class WeatherCoordinator: Coordinator {
     }
     
     override func start() {
-        let weatherViewModel = WeatherViewModel(city: city)
+        let weatherViewModel = WeatherViewModel(city: city, apiService: apiService)
         weatherViewModel.delegate = self
         let weatherViewController = WeatherViewController(viewModel: weatherViewModel)
         rootViewController.pushViewController(weatherViewController, animated: true)
