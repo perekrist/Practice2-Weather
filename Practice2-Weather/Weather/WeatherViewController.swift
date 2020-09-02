@@ -145,7 +145,7 @@ extension WeatherViewController {
     private func constraintMainInfo() {
         view.addSubview(cityLabel)
         cityLabel.snp.makeConstraints { make in
-            make.top.equalTo(100)
+            make.top.equalTo(90)
             make.leading.equalTo(16)
         }
         
@@ -163,7 +163,7 @@ extension WeatherViewController {
         
         view.addSubview(weatherImage)
         weatherImage.snp.makeConstraints { make in
-            make.top.equalTo(tempLabel.snp.bottom).offset(10)
+            make.top.equalTo(tempLabel.snp.bottom)
             make.leading.equalTo(17)
             make.height.equalTo(87)
         }
@@ -184,31 +184,31 @@ extension WeatherViewController {
         
         view.addSubview(pressure)
         pressure.snp.makeConstraints { make in
-            make.bottom.equalTo(pressureLabel.snp.top).offset(-10)
+            make.bottom.equalTo(pressureLabel.snp.top).offset(-7)
             make.leading.equalTo(16)
         }
         
         view.addSubview(windLabel)
         windLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(pressure.snp.top).offset(-40)
+            make.bottom.equalTo(pressure.snp.top).offset(-20)
             make.leading.equalTo(15)
         }
         
         view.addSubview(wind)
         wind.snp.makeConstraints { make in
-            make.bottom.equalTo(windLabel.snp.top).offset(-10)
+            make.bottom.equalTo(windLabel.snp.top).offset(-7)
             make.leading.equalTo(16)
         }
         
         view.addSubview(humidityLabel)
         humidityLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(wind.snp.top).offset(-40)
+            make.bottom.equalTo(wind.snp.top).offset(-20)
             make.leading.equalTo(15)
         }
         
         view.addSubview(humidity)
         humidity.snp.makeConstraints { make in
-            make.bottom.equalTo(humidityLabel.snp.top).offset(-10)
+            make.bottom.equalTo(humidityLabel.snp.top).offset(-7)
             make.leading.equalTo(16)
         }
         
