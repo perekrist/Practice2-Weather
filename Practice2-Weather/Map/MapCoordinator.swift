@@ -23,7 +23,7 @@ class MapCoordinator: Coordinator {
     }
 }
 
-extension MapCoordinator: WeatherCoordinatorDelegate {
+extension MapCoordinator: WeatherCoordinatorOutput {
     func didFinish(from coordinator: WeatherCoordinator) {
         removeChildCoordinator(coordinator)
     }
