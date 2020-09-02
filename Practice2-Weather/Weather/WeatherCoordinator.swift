@@ -8,22 +8,24 @@
 
 import UIKit
 
-protocol WeatherCoordinatorDelegate: class {
+protocol WeatherCoordinatorOutput: class {
     func didFinish(from coordinator: WeatherCoordinator)
 }
 
 class WeatherCoordinator: Coordinator {
-    weak var delegate: WeatherCoordinatorDelegate?
-    let rootViewController: UINavigationController
-    let city: String
-    
+    weak var delegate: WeatherCoordinatorOutput?
+  
+    private let rootViewController: UINavigationController
+    private let city: String
+    private let apiService = NetworkingService()
+
     init(rootViewController: UINavigationController, city: String) {
         self.rootViewController = rootViewController
         self.city = city
     }
     
     override func start() {
-        let weatherViewModel = WeatherViewModel(city: city)
+        let weatherViewModel = WeatherViewModel(city: city, apiService: apiService)
         weatherViewModel.delegate = self
         let weatherViewController = WeatherViewController(viewModel: weatherViewModel)
         rootViewController.pushViewController(weatherViewController, animated: true)

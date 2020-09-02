@@ -28,16 +28,18 @@ class WeatherViewModel {
     var error = ""
     let cityName: String
     
+    weak var delegate: WeatherViewModelDelegate?
+    
     var weatherForecast: Weather?
     
-    var apiService: NetworkingService
-    
     var onDidUpdate: (() -> Void)?
-    var onDidError: (() -> Void)?
+    var onDidError: ((Error) -> Void)?
     
-    init(city: String) {
+    private var apiService: NetworkingService
+    
+    init(city: String, apiService: NetworkingService) {
         self.cityName = city
-        apiService = NetworkingService()
+        self.apiService = apiService
     }
     
     func getWeather() {
@@ -51,8 +53,7 @@ class WeatherViewModel {
                 self.onDidUpdate?()
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                self.error = error.localizedDescription
-                self.onDidError?()
+                self.onDidError?(error)
             }
         }
     }
@@ -75,7 +76,7 @@ class WeatherViewModel {
         let index = Int((deg + 22.5) / 45.0) & 7
         return directions[index]
     }
-    
+  
     func goBack() {
         delegate?.weatherViewModelDidFinish(self)
     }
