@@ -14,6 +14,8 @@ protocol WeatherViewModelDelegate: class {
 }
 
 class WeatherViewModel {
+    let cityName: String
+    
     var weatherDegree: String = ""
     var weatherDescription: String = ""
     var humidity: String = ""
@@ -22,11 +24,6 @@ class WeatherViewModel {
     
     var imageName: String = ""
     var imageURL: URL?
-    
-    weak var delegate: WeatherViewModelDelegate?
-    
-    var error = ""
-    let cityName: String
     
     weak var delegate: WeatherViewModelDelegate?
     
@@ -62,19 +59,12 @@ class WeatherViewModel {
         self.weatherDegree = String(Int((weatherForecast?.main.temp) ?? 0))
         self.weatherDescription = (weatherForecast?.weather.first?.main ?? "-") as String
         self.humidity = "\(Double((weatherForecast?.main.humidity) ?? 0)) %"
-        let windDirection = "\(compassDirection(for: weatherForecast?.wind.deg ?? -1))"
+        let windDirection = (weatherForecast?.wind.deg.compassDirection ?? "") as String
         self.wind = "\(windDirection) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
         self.pressure = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
         self.imageName = (weatherForecast?.weather.first?.description.lowercased() ?? "") as String
         self.imageURL = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
         
-    }
-    
-    func compassDirection(for deg: Double) -> String {
-        if deg < 0 { return "Wind direction error" }
-        let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
-        let index = Int((deg + 22.5) / 45.0) & 7
-        return directions[index]
     }
   
     func goBack() {
