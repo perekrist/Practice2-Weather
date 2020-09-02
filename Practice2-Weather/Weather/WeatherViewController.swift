@@ -217,14 +217,4 @@ extension WeatherViewController {
         guard let image = UIImage(named: imageName.replacingOccurrences(of: " ", with: "-")) else { return }
         weatherImageLarge.image = image
     }
-    
-    private func showError(_ error: String) {
-        let alert = UIAlertController(title: R.string.common.errorTitle(), message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: R.string.common.okTitle(), style: .cancel) { _ in
-          self.navigationController?.popViewController(animated: true)
-          self.viewModel.goBack()
-        })
-        self.present(alert, animated: true, completion: nil)
-    }
-    
 }

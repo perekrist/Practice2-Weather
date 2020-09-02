@@ -16,9 +16,7 @@ class MapViewController: UIViewController {
     
     private let mapView = MKMapView()
     private let mapPickView = MapPickView()
-    
-    var timer: Timer?
-    
+        
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
