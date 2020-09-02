@@ -59,7 +59,7 @@ extension WeatherViewController {
         bindToViewModel()
         setupLabels()
         setupImages()
-        setupLayout()
+        addConstraints()
     }
     
     private func bindToViewModel() {
@@ -83,6 +83,11 @@ extension WeatherViewController {
     }
     
     private func setupLabels() {
+        setupMainLabels()
+        setupAdditionalLabels()
+    }
+    
+    private func setupMainLabels() {
         cityLabel.textColor = #colorLiteral(red: 0.2078431373, green: 0.2078431373, blue: 0.2078431373, alpha: 1)
         cityLabel.font = .boldSystemFont(ofSize: 34)
         
@@ -95,7 +100,9 @@ extension WeatherViewController {
         
         weatherLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         weatherLabel.font = .systemFont(ofSize: 18)
-        
+    }
+    
+    private func setupAdditionalLabels() {
         humidity.text = R.string.weather.humiditY()
         humidity.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         humidity.font = .systemFont(ofSize: 18)
@@ -123,7 +130,12 @@ extension WeatherViewController {
         weatherImageLarge.contentMode = .scaleAspectFit
     }
     
-    private func setupLayout() {
+    private func addConstraints() {
+        constraintMainInfo()
+        constraintAdditionalInfo()
+    }
+    
+    private func constraintMainInfo() {
         view.addSubview(cityLabel)
         cityLabel.snp.makeConstraints { make in
             make.top.equalTo(100)
@@ -154,7 +166,9 @@ extension WeatherViewController {
             make.top.equalTo(weatherImage.snp.bottom).offset(12)
             make.leading.equalTo(34)
         }
+    }
         
+    private func constraintAdditionalInfo() {
         view.addSubview(pressureLabel)
         pressureLabel.snp.makeConstraints { make in
             make.bottom.equalTo(-21)
