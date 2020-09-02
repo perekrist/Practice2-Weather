@@ -70,7 +70,7 @@ extension WeatherViewController {
             self.tempLabel.text = String(Int((weatherForecast?.main.temp) ?? 0))
             self.weatherLabel.text = weatherForecast?.weather.first?.main
             self.humidityLabel.text = "\(Double((weatherForecast?.main.humidity) ?? 0)) %"
-            let windDirection = "\(self.viewModel.compassDirection(for: weatherForecast?.wind.deg ?? -1))"
+            let windDirection = weatherForecast?.wind.deg.compassDirection
             self.windLabel.text = "\(windDirection) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
             self.pressureLabel.text = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
             
@@ -82,9 +82,9 @@ extension WeatherViewController {
             self.weatherImage.kf.setImage(with: url)
         }
         
-        viewModel.onDidError = { [weak self] in
-            guard let error = self?.viewModel.error else { return }
-            self?.showError(error)
+        viewModel.onDidError = { [weak self] error in
+            guard let self = self else { return }
+            self.showError(error)
         }
     }
     
