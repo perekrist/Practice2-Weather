@@ -65,21 +65,28 @@ extension WeatherViewController {
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
-            self.cityLabel.text = self.viewModel.cityName
-            self.tempLabel.text = self.viewModel.weatherDegree
-            self.weatherLabel.text = self.viewModel.weatherDescription
-            self.humidityLabel.text = self.viewModel.humidity
-            self.windLabel.text = self.viewModel.wind
-            self.pressureLabel.text = self.viewModel.pressure
-            
-            self.setupImageView(self.viewModel.imageName)
-            self.weatherImage.kf.setImage(with: self.viewModel.imageURL)
+            self.updateLabels()
+            self.updateImages()
         }
         
         viewModel.onDidError = { [weak self] error in
             guard let self = self else { return }
             self.showError(error)
         }
+    }
+    
+    private func updateLabels() {
+        self.cityLabel.text = self.viewModel.cityName
+        self.tempLabel.text = self.viewModel.weatherDegree
+        self.weatherLabel.text = self.viewModel.weatherDescription
+        self.humidityLabel.text = self.viewModel.humidity
+        self.windLabel.text = self.viewModel.wind
+        self.pressureLabel.text = self.viewModel.pressure
+    }
+    
+    private func updateImages() {
+        self.setupImageView(self.viewModel.imageName)
+        self.weatherImage.kf.setImage(with: self.viewModel.imageURL)
     }
     
     private func setupLabels() {
@@ -167,7 +174,7 @@ extension WeatherViewController {
             make.leading.equalTo(34)
         }
     }
-        
+    
     private func constraintAdditionalInfo() {
         view.addSubview(pressureLabel)
         pressureLabel.snp.makeConstraints { make in
