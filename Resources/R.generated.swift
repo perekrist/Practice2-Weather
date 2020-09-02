@@ -275,7 +275,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    /// This `R.string.weather` struct is generated, and contains static references to 6 localization keys.
+    /// This `R.string.weather` struct is generated, and contains static references to 7 localization keys.
     struct weather {
       /// Value: HUMIDITY
       static let humiditY = Rswift.StringResource(key: "HUMIDITY", tableName: "Weather", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -287,6 +287,8 @@ struct R: Rswift.Validatable {
       static let winD = Rswift.StringResource(key: "WIND", tableName: "Weather", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Wind direction error
       static let windDirectionError = Rswift.StringResource(key: "windDirectionError", tableName: "Weather", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: metric
+      static let units = Rswift.StringResource(key: "units", tableName: "Weather", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: °C
       static let celsius = Rswift.StringResource(key: "celsius", tableName: "Weather", bundle: R.hostingBundle, locales: [], comment: nil)
 
@@ -353,6 +355,19 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("windDirectionError", tableName: "Weather", bundle: bundle, comment: "")
+      }
+
+      /// Value: metric
+      static func units(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("units", tableName: "Weather", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Weather", preferredLanguages: preferredLanguages) else {
+          return "units"
+        }
+
+        return NSLocalizedString("units", tableName: "Weather", bundle: bundle, comment: "")
       }
 
       /// Value: °C

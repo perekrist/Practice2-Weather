@@ -12,3 +12,4 @@
 "PRESSURE" = "PRESSURE";
 "backButtonTitle" = "Map";
 "windDirectionError" = "Wind direction error";
+"units" = "metric";
