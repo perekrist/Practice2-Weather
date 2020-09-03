@@ -16,9 +16,7 @@ class MapViewController: UIViewController {
     
     private let mapView = MKMapView()
     private let mapPickView = MapPickView()
-    
-    var timer: Timer?
-    
+        
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -98,9 +96,7 @@ extension MapViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
-        
-        self.navigationController?.navigationBar.layer.setStandartShadow()
+        navigationItem.searchController = searchController        
     }
     
     private func setupMapView() {
