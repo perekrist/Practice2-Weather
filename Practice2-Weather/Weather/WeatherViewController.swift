@@ -16,17 +16,17 @@ class WeatherViewController: UIViewController {
     private let viewModel: WeatherViewModel
     private let tempViewModel = TemperatureViewModel()
     
-    private lazy var humidityLabel = UILabel()
-    private lazy var windLabel = UILabel()
-    private lazy var pressureLabel = UILabel()
+    private let humidityViewModel = AdditionalViewModel()
+    private let windViewModel = AdditionalViewModel()
+    private let pressureViewModel = AdditionalViewModel()
     
     private lazy var weatherImageLarge = UIImageView()
     
     private lazy var temperatureView = TemperatureView()
     
-    private var humidity = UILabel()
-    private var wind = UILabel()
-    private var pressure = UILabel()
+    private lazy var humidityView = AdditionalView()
+    private lazy var windView = AdditionalView()
+    private lazy var pressureView = AdditionalView()
     
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
@@ -67,6 +67,7 @@ extension WeatherViewController {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
             self.updateTempView()
+            self.updateAdditionalViews()
             self.updateLabels()
             self.updateImages()
         }
@@ -84,12 +85,22 @@ extension WeatherViewController {
         self.temperatureView.update()
     }
     
+    private func updateAdditionalViews() {
+        self.humidityViewModel.update(itemName: R.string.weather.humiditY(),
+                                      itemDescription: self.viewModel.humidity)
+        self.humidityView.update()
+        
+        self.windViewModel.update(itemName: R.string.weather.winD(),
+                                  itemDescription: self.viewModel.wind)
+        self.windView.update()
+        
+        self.pressureViewModel.update(itemName: R.string.weather.pressurE(),
+                                      itemDescription: self.viewModel.pressure)
+        self.pressureView.update()
+    }
+    
     private func updateLabels() {
         self.cityLabel.text = self.viewModel.cityName
-        
-        self.humidityLabel.text = self.viewModel.humidity
-        self.windLabel.text = self.viewModel.wind
-        self.pressureLabel.text = self.viewModel.pressure
     }
     
     private func updateImages() {
@@ -97,36 +108,8 @@ extension WeatherViewController {
     }
     
     private func setupLabels() {
-        setupMainLabels()
-        setupAdditionalLabels()
-    }
-    
-    private func setupMainLabels() {
         cityLabel.textColor = #colorLiteral(red: 0.2078431373, green: 0.2078431373, blue: 0.2078431373, alpha: 1)
         cityLabel.font = .boldSystemFont(ofSize: 34)
-    }
-    
-    private func setupAdditionalLabels() {
-        humidity.text = R.string.weather.humiditY()
-        humidity.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        humidity.font = .systemFont(ofSize: 18)
-        
-        humidityLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        humidityLabel.font = .boldSystemFont(ofSize: 18)
-        
-        wind.text = R.string.weather.winD()
-        wind.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        wind.font = .systemFont(ofSize: 18)
-        
-        windLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        windLabel.font = .boldSystemFont(ofSize: 18)
-        
-        pressure.text = R.string.weather.pressurE()
-        pressure.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        pressure.font = .systemFont(ofSize: 18)
-        
-        pressureLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        pressureLabel.font = .boldSystemFont(ofSize: 18)
     }
     
     private func setupImages() {
@@ -154,46 +137,31 @@ extension WeatherViewController {
     }
     
     private func constraintAdditionalInfo() {
-        view.addSubview(pressureLabel)
-        pressureLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(-21)
-            make.leading.equalTo(15)
-        }
-        
-        view.addSubview(pressure)
-        pressure.snp.makeConstraints { make in
-            make.bottom.equalTo(pressureLabel.snp.top).offset(-7)
-            make.leading.equalTo(16)
-        }
-        
-        view.addSubview(windLabel)
-        windLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(pressure.snp.top).offset(-20)
-            make.leading.equalTo(15)
-        }
-        
-        view.addSubview(wind)
-        wind.snp.makeConstraints { make in
-            make.bottom.equalTo(windLabel.snp.top).offset(-7)
-            make.leading.equalTo(16)
-        }
-        
-        view.addSubview(humidityLabel)
-        humidityLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(wind.snp.top).offset(-20)
-            make.leading.equalTo(15)
-        }
-        
-        view.addSubview(humidity)
-        humidity.snp.makeConstraints { make in
-            make.bottom.equalTo(humidityLabel.snp.top).offset(-7)
-            make.leading.equalTo(16)
-        }
-        
         view.addSubview(weatherImageLarge)
         weatherImageLarge.snp.makeConstraints { make in
             make.trailing.equalTo(0)
             make.bottom.equalTo(0)
+        }
+        
+        pressureView.setup(with: pressureViewModel)
+        view.addSubview(pressureView)
+        pressureView.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-40)
+            make.leading.equalTo(16)
+        }
+        
+        windView.setup(with: windViewModel)
+        view.addSubview(windView)
+        windView.snp.makeConstraints { make in
+            make.bottom.equalTo(pressureView.snp.top).offset(-60)
+            make.leading.equalTo(16)
+        }
+        
+        humidityView.setup(with: humidityViewModel)
+        view.addSubview(humidityView)
+        humidityView.snp.makeConstraints { make in
+            make.bottom.equalTo(windView.snp.top).offset(-60)
+            make.leading.equalTo(16)
         }
     }
     

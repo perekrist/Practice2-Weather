@@ -27,9 +27,6 @@ class TemperatureView: UIView {
 extension TemperatureView {
     func setup(with viewModel: TemperatureViewModel) {
         self.viewModel = viewModel
-        
-        print(viewModel.temp)
-        
         update()
         setNeedsLayout()
     }
