@@ -107,94 +107,94 @@ struct R: Rswift.Validatable {
 
   /// This `R.image` struct is generated, and contains static references to 10 images.
   struct image {
+    /// Image `a01`.
+    static let a01 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a01")
+    /// Image `a02`.
+    static let a02 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a02")
+    /// Image `a03`.
+    static let a03 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a03")
+    /// Image `a04`.
+    static let a04 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a04")
+    /// Image `a09`.
+    static let a09 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a09")
+    /// Image `a10`.
+    static let a10 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a10")
+    /// Image `a11`.
+    static let a11 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a11")
+    /// Image `a13`.
+    static let a13 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a13")
+    /// Image `a50`.
+    static let a50 = Rswift.ImageResource(bundle: R.hostingBundle, name: "a50")
     /// Image `annotation`.
     static let annotation = Rswift.ImageResource(bundle: R.hostingBundle, name: "annotation")
-    /// Image `broken-clouds`.
-    static let brokenClouds = Rswift.ImageResource(bundle: R.hostingBundle, name: "broken-clouds")
-    /// Image `clear-sky`.
-    static let clearSky = Rswift.ImageResource(bundle: R.hostingBundle, name: "clear-sky")
-    /// Image `few-clouds`.
-    static let fewClouds = Rswift.ImageResource(bundle: R.hostingBundle, name: "few-clouds")
-    /// Image `mist`.
-    static let mist = Rswift.ImageResource(bundle: R.hostingBundle, name: "mist")
-    /// Image `rain`.
-    static let rain = Rswift.ImageResource(bundle: R.hostingBundle, name: "rain")
-    /// Image `scattered-clouds`.
-    static let scatteredClouds = Rswift.ImageResource(bundle: R.hostingBundle, name: "scattered-clouds")
-    /// Image `shower-rain`.
-    static let showerRain = Rswift.ImageResource(bundle: R.hostingBundle, name: "shower-rain")
-    /// Image `snow`.
-    static let snow = Rswift.ImageResource(bundle: R.hostingBundle, name: "snow")
-    /// Image `thunderstorm`.
-    static let thunderstorm = Rswift.ImageResource(bundle: R.hostingBundle, name: "thunderstorm")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a01", bundle: ..., traitCollection: ...)`
+    static func a01(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a01, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a02", bundle: ..., traitCollection: ...)`
+    static func a02(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a02, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a03", bundle: ..., traitCollection: ...)`
+    static func a03(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a03, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a04", bundle: ..., traitCollection: ...)`
+    static func a04(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a04, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a09", bundle: ..., traitCollection: ...)`
+    static func a09(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a09, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a10", bundle: ..., traitCollection: ...)`
+    static func a10(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a10, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a11", bundle: ..., traitCollection: ...)`
+    static func a11(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a11, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a13", bundle: ..., traitCollection: ...)`
+    static func a13(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a13, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "a50", bundle: ..., traitCollection: ...)`
+    static func a50(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.a50, compatibleWith: traitCollection)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "annotation", bundle: ..., traitCollection: ...)`
     static func annotation(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.annotation, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "broken-clouds", bundle: ..., traitCollection: ...)`
-    static func brokenClouds(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.brokenClouds, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "clear-sky", bundle: ..., traitCollection: ...)`
-    static func clearSky(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.clearSky, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "few-clouds", bundle: ..., traitCollection: ...)`
-    static func fewClouds(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.fewClouds, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "mist", bundle: ..., traitCollection: ...)`
-    static func mist(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.mist, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "rain", bundle: ..., traitCollection: ...)`
-    static func rain(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.rain, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "scattered-clouds", bundle: ..., traitCollection: ...)`
-    static func scatteredClouds(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.scatteredClouds, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "shower-rain", bundle: ..., traitCollection: ...)`
-    static func showerRain(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.showerRain, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "snow", bundle: ..., traitCollection: ...)`
-    static func snow(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.snow, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "thunderstorm", bundle: ..., traitCollection: ...)`
-    static func thunderstorm(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.thunderstorm, compatibleWith: traitCollection)
     }
     #endif
 

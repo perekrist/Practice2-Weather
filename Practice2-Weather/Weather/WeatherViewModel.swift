@@ -84,7 +84,7 @@ class WeatherViewModel {
         let windDirection = (weatherForecast?.wind.deg.compassDirection ?? "") as String
         self.wind = "\(windDirection) \(Double((weatherForecast?.wind.speed) ?? 0)) m/s"
         self.pressure = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
-        self.imageName = (weatherForecast?.weather.first?.description.lowercased() ?? "") as String
+        self.imageName = "a\((weatherForecast?.weather.first?.icon.dropLast() ?? "a01"))"
         self.imageURL = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
     }
     

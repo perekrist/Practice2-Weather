@@ -151,7 +151,7 @@ extension WeatherViewController {
     }
     
     private func setupImageView(_ imageName: String) {
-        self.weatherImageLarge.image = R.image.clearSky()
+        self.weatherImageLarge.image = R.image.a01()
         guard let image = UIImage(named: imageName.replacingOccurrences(of: " ", with: "-")) else { return }
         weatherImageLarge.image = image
     }
