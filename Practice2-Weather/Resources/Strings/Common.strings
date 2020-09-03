@@ -1,0 +1,10 @@
+/* 
+  Common.strings
+  Practice2-Weather
+
+  Created by Кристина Перегудова on 28.08.2020.
+  Copyright © 2020 Кристина Перегудова. All rights reserved.
+*/
+
+"errorTitle" = "An error has occurred";
+"okTitle" = "Ok";

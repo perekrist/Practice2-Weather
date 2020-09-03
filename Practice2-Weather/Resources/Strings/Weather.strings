@@ -1,0 +1,15 @@
+/* 
+  Weather.strings
+  Practice2-Weather
+
+  Created by Кристина Перегудова on 28.08.2020.
+  Copyright © 2020 Кристина Перегудова. All rights reserved.
+*/
+
+"celsius" = "°C";
+"HUMIDITY" = "HUMIDITY";
+"WIND" = "WIND";
+"PRESSURE" = "PRESSURE";
+"backButtonTitle" = "Map";
+"windDirectionError" = "Wind direction error";
+"units" = "metric";

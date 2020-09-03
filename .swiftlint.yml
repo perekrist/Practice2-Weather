@@ -1,0 +1,119 @@
+disabled_rules: # rule identifiers to exclude from running
+  - trailing_whitespace
+  - todo
+
+opt_in_rules:
+  - force_unwrapping
+  - private_action
+  - private_outlet
+  - array_init
+  - closure_body_length
+  - contains_over_first_not_nil
+  - empty_count
+  - empty_string
+  - explicit_init
+  - fallthrough
+  - first_where
+  - implicitly_unwrapped_optional
+  - operator_usage_whitespace
+  - sorted_first_last
+  - switch_case_on_newline
+  - trailing_closure
+  - unneeded_parentheses_in_closure_argument
+  - unused_import
+  - unused_private_declaration
+  - vertical_parameter_alignment_on_call
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+  - GeneratedCode
+  - Resources/R.generated.swift
+
+custom_rules:
+  empty_first_line:
+    name: 'Empty First Line'
+    regex: '(^[ a-zA-Z ]*(?:protocol|extension|class|struct|func) [ a-zA-Z0-9:,<>\.\(\)\"-=`]*\{\n( *)?\n)'
+    message: 'There should not be an empty line after a declaration'
+    severity: warning
+
+  comments_space:
+    name: 'Space After Comment'
+    regex: '(^ *//\w+)'
+    message: 'There should be a space after //'
+    severity: warning
+
+  first_parameter_on_new_line:
+    name: 'First Parameter On New Line'
+    regex: '(^[ a-zA-Z0-9=?.\(\),><!`_ ]*\($)'
+    message: 'First parameter should be on the same line as func name'
+    severity: error
+
+  closing_bracket_on_new_line:
+    name: 'Closing Bracket On New Line'
+    regex: '(^[ ]*\))'
+    message: 'Closing bracket should be on the same line as last parameter'
+    severity: error
+
+  type_annotation_empty_arrays_dictionaries:
+    name: 'Type Annotation for Empty Arrays and Dictionaries'
+    regex: '= (?!\[:\])\[[a-zA-Z(), :]+\]\(\)'
+    message: 'For empty arrays and dictionaries, use type annotation'
+    severity: warning
+
+  uppercased_abbreviations:
+    name: "Uppercased abbreviations"
+    regex: "\\w*Url.*|\\w*Id([\\]\\(_:A-Z].*)?$"
+    match_kinds:
+      - identifier
+      - argument
+      - keyword
+      - objectliteral
+      - parameter
+      - typeidentifier
+      - attribute.builtin
+      - attribute.id
+      - buildconfig.id
+      - buildconfig.keyword
+      - comment
+      - doccomment
+      - placeholder
+    message: "Abbreviations such as URL, ID should be uppercased."
+
+empty_count: warning
+
+function_parameter_count:
+  warning: 10
+  error: 10
+
+variable_name:  
+  excluded:
+    - to
+    - row
+    - key
+    - id
+    - url
+    - uri
+    - db
+    - bar
+    - red
+    - lhs
+    - rhs
+    - tag
+    - rs
+    - URI
+    - URL
+    - me
+    - otp
+    - h1
+    - h2
+    - h3
+    - h4
+type_name: 
+  excluded:
+    - T
+
+line_length: 130
+file_length:
+  warning: 500
+  error: 800
+
