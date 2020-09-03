@@ -12,20 +12,21 @@ import Kingfisher
 
 class WeatherViewController: UIViewController {
     lazy var cityLabel = UILabel()
-    lazy var tempLabel = UILabel()
-    lazy var weatherLabel = UILabel()
-    lazy var weatherImage = UIImageView()
-    lazy var humidityLabel = UILabel()
-    lazy var windLabel = UILabel()
-    lazy var pressureLabel = UILabel()
-    lazy var weatherImageLarge = UIImageView()
-    lazy var celsius = UILabel()
-    
-    lazy var humidity = UILabel()
-    lazy var wind = UILabel()
-    lazy var pressure = UILabel()
     
     private let viewModel: WeatherViewModel
+    private let tempViewModel = TemperatureViewModel()
+    
+    private lazy var humidityLabel = UILabel()
+    private lazy var windLabel = UILabel()
+    private lazy var pressureLabel = UILabel()
+    
+    private lazy var weatherImageLarge = UIImageView()
+    
+    private lazy var temperatureView = TemperatureView()
+    
+    private var humidity = UILabel()
+    private var wind = UILabel()
+    private var pressure = UILabel()
     
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
@@ -55,16 +56,17 @@ class WeatherViewController: UIViewController {
 extension WeatherViewController {
     private func initialSetup() {
         view.backgroundColor = .white
-        viewModel.getWeather()
-        bindToViewModel()
         setupLabels()
         setupImages()
         addConstraints()
+        bindToViewModel()
+        viewModel.getWeather()
     }
     
     private func bindToViewModel() {
         viewModel.onDidUpdate = { [weak self] in
             guard let self = self else { return }
+            self.updateTempView()
             self.updateLabels()
             self.updateImages()
         }
@@ -75,10 +77,16 @@ extension WeatherViewController {
         }
     }
     
+    private func updateTempView() {
+        self.tempViewModel.update(temperature: self.viewModel.weatherDegree,
+                                  weatherDescription: self.viewModel.weatherDescription,
+                                  weatherImageUrl: self.viewModel.imageURL!)
+        self.temperatureView.update()
+    }
+    
     private func updateLabels() {
         self.cityLabel.text = self.viewModel.cityName
-        self.tempLabel.text = self.viewModel.weatherDegree
-        self.weatherLabel.text = self.viewModel.weatherDescription
+        
         self.humidityLabel.text = self.viewModel.humidity
         self.windLabel.text = self.viewModel.wind
         self.pressureLabel.text = self.viewModel.pressure
@@ -86,7 +94,6 @@ extension WeatherViewController {
     
     private func updateImages() {
         self.setupImageView(self.viewModel.imageName)
-        self.weatherImage.kf.setImage(with: self.viewModel.imageURL)
     }
     
     private func setupLabels() {
@@ -97,16 +104,6 @@ extension WeatherViewController {
     private func setupMainLabels() {
         cityLabel.textColor = #colorLiteral(red: 0.2078431373, green: 0.2078431373, blue: 0.2078431373, alpha: 1)
         cityLabel.font = .boldSystemFont(ofSize: 34)
-        
-        tempLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        tempLabel.font = .boldSystemFont(ofSize: 120)
-        
-        celsius.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        celsius.text = R.string.weather.celsius()
-        celsius.font = .systemFont(ofSize: 50)
-        
-        weatherLabel.textColor = #colorLiteral(red: 0.1137254902, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
-        weatherLabel.font = .systemFont(ofSize: 18)
     }
     
     private func setupAdditionalLabels() {
@@ -133,7 +130,6 @@ extension WeatherViewController {
     }
     
     private func setupImages() {
-        weatherImage.contentMode = .scaleAspectFit
         weatherImageLarge.contentMode = .scaleAspectFit
     }
     
@@ -149,29 +145,11 @@ extension WeatherViewController {
             make.leading.equalTo(16)
         }
         
-        view.addSubview(tempLabel)
-        tempLabel.snp.makeConstraints { make in
-            make.top.equalTo(cityLabel.snp.bottom).offset(24)
-            make.leading.equalTo(15)
-        }
-        
-        view.addSubview(celsius)
-        celsius.snp.makeConstraints { make in
-            make.top.equalTo(tempLabel.snp.top).offset(15)
-            make.leading.equalTo(tempLabel.snp.trailing)
-        }
-        
-        view.addSubview(weatherImage)
-        weatherImage.snp.makeConstraints { make in
-            make.top.equalTo(tempLabel.snp.bottom)
-            make.leading.equalTo(17)
-            make.height.equalTo(87)
-        }
-        
-        view.addSubview(weatherLabel)
-        weatherLabel.snp.makeConstraints { make in
-            make.top.equalTo(weatherImage.snp.bottom).offset(12)
-            make.leading.equalTo(34)
+        temperatureView.setup(with: tempViewModel)
+        view.addSubview(temperatureView)
+        temperatureView.snp.makeConstraints { make in
+            make.top.equalTo(cityLabel.snp.bottom)
+            make.leading.equalTo(16)
         }
     }
     
