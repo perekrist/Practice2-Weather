@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 protocol WeatherViewModelDelegate: class {
     func weatherViewModelDidFinish(_ viewModel: WeatherViewModel)
@@ -31,8 +30,15 @@ class WeatherViewModel {
     
     var onDidUpdate: (() -> Void)?
     var onDidError: ((Error) -> Void)?
+    var onDidStartRequest: (() -> Void)?
+    var onDidFinishRequest: (() -> Void)?
     
     private var apiService: NetworkingService
+    
+    let tempViewModel = TemperatureViewModel()
+    let humidityViewModel = AdditionalViewModel()
+    let windViewModel = AdditionalViewModel()
+    let pressureViewModel = AdditionalViewModel()
     
     init(city: String, apiService: NetworkingService) {
         self.cityName = city
@@ -40,19 +46,35 @@ class WeatherViewModel {
     }
     
     func getWeather() {
-        SVProgressHUD.show()
+        onDidStartRequest?()
         apiService.getWeatherByCity(city: cityName) { result in
             switch result {
             case .success(let weather):
-                SVProgressHUD.dismiss()
+                self.onDidFinishRequest?()
                 self.weatherForecast = weather
                 self.updateLabels()
+                self.setupViewModels()
                 self.onDidUpdate?()
             case .failure(let error):
-                SVProgressHUD.dismiss()
+                self.onDidFinishRequest?()
                 self.onDidError?(error)
             }
         }
+    }
+    
+    private func setupViewModels() {
+        tempViewModel.update(temperature: self.weatherDegree,
+                             weatherDescription: self.weatherDescription,
+                             weatherImageUrl: self.imageURL!)
+        
+        humidityViewModel.update(itemName: R.string.weather.humiditY(),
+                                 itemDescription: self.humidity)
+        
+        windViewModel.update(itemName: R.string.weather.winD(),
+                             itemDescription: self.wind)
+        
+        pressureViewModel.update(itemName: R.string.weather.pressurE(),
+                                 itemDescription: self.pressure)
     }
     
     private func updateLabels() {
@@ -64,9 +86,8 @@ class WeatherViewModel {
         self.pressure = "\(Int((weatherForecast?.main.pressure) ?? 0)) mm Hg"
         self.imageName = (weatherForecast?.weather.first?.description.lowercased() ?? "") as String
         self.imageURL = URL(string: Constants.apiImageUrl + (weatherForecast?.weather.first?.icon ?? "01n") + "@2x.png")
-        
     }
-  
+    
     func goBack() {
         delegate?.weatherViewModelDidFinish(self)
     }

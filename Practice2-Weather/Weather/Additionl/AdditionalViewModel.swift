@@ -9,8 +9,8 @@
 import Foundation
 
 class AdditionalViewModel {
-    var itemName: String = "-"
-    var itemDescription: String = "-"
+    var itemName: String?
+    var itemDescription: String?
     
     func update(itemName: String, itemDescription: String) {
         self.itemName = itemName

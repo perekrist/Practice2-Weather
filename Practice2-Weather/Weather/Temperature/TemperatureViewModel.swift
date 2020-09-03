@@ -9,8 +9,8 @@
 import Foundation
 
 class TemperatureViewModel {
-    var temp: String = "-"
-    var weatherDescription: String = "--"
+    var temp: String?
+    var weatherDescription: String?
     var imageURL: URL?
     
     func update(temperature: String, weatherDescription: String, weatherImageUrl: URL) {

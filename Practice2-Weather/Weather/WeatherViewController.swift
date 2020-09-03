@@ -9,14 +9,10 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import SVProgressHUD
 
 class WeatherViewController: UIViewController {
     private let viewModel: WeatherViewModel
-    private let tempViewModel = TemperatureViewModel()
-    
-    private let humidityViewModel = AdditionalViewModel()
-    private let windViewModel = AdditionalViewModel()
-    private let pressureViewModel = AdditionalViewModel()
     
     private lazy var weatherImageLarge = UIImageView()
     private lazy var cityLabel = UILabel()
@@ -68,26 +64,23 @@ extension WeatherViewController {
             guard let self = self else { return }
             self.showError(error)
         }
+        
+        viewModel.onDidStartRequest = { [unowned self] in
+            SVProgressHUD.show()
+        }
+        
+        viewModel.onDidFinishRequest = { [unowned self] in
+            SVProgressHUD.dismiss()
+        }
     }
     
     private func updateTempView() {
-        self.tempViewModel.update(temperature: self.viewModel.weatherDegree,
-                                  weatherDescription: self.viewModel.weatherDescription,
-                                  weatherImageUrl: self.viewModel.imageURL!)
         self.temperatureView.update()
     }
     
     private func updateAdditionalViews() {
-        self.humidityViewModel.update(itemName: R.string.weather.humiditY(),
-                                      itemDescription: self.viewModel.humidity)
         self.humidityView.update()
-        
-        self.windViewModel.update(itemName: R.string.weather.winD(),
-                                  itemDescription: self.viewModel.wind)
         self.windView.update()
-        
-        self.pressureViewModel.update(itemName: R.string.weather.pressurE(),
-                                      itemDescription: self.viewModel.pressure)
         self.pressureView.update()
     }
     
@@ -120,7 +113,7 @@ extension WeatherViewController {
             make.leading.equalTo(16)
         }
         
-        temperatureView.setup(with: tempViewModel)
+        temperatureView.setup(with: viewModel.tempViewModel)
         view.addSubview(temperatureView)
         temperatureView.snp.makeConstraints { make in
             make.top.equalTo(cityLabel.snp.bottom)
@@ -135,21 +128,21 @@ extension WeatherViewController {
             make.bottom.equalTo(0)
         }
         
-        pressureView.setup(with: pressureViewModel)
+        pressureView.setup(with: viewModel.pressureViewModel)
         view.addSubview(pressureView)
         pressureView.snp.makeConstraints { make in
             make.bottom.equalTo(view.snp.bottom).offset(-40)
             make.leading.equalTo(16)
         }
         
-        windView.setup(with: windViewModel)
+        windView.setup(with: viewModel.windViewModel)
         view.addSubview(windView)
         windView.snp.makeConstraints { make in
             make.bottom.equalTo(pressureView.snp.top).offset(-60)
             make.leading.equalTo(16)
         }
         
-        humidityView.setup(with: humidityViewModel)
+        humidityView.setup(with: viewModel.humidityViewModel)
         view.addSubview(humidityView)
         humidityView.snp.makeConstraints { make in
             make.bottom.equalTo(windView.snp.top).offset(-60)
