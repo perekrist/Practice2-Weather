@@ -11,8 +11,6 @@ import SnapKit
 import Kingfisher
 
 class WeatherViewController: UIViewController {
-    lazy var cityLabel = UILabel()
-    
     private let viewModel: WeatherViewModel
     private let tempViewModel = TemperatureViewModel()
     
@@ -21,9 +19,8 @@ class WeatherViewController: UIViewController {
     private let pressureViewModel = AdditionalViewModel()
     
     private lazy var weatherImageLarge = UIImageView()
-    
+    private lazy var cityLabel = UILabel()
     private lazy var temperatureView = TemperatureView()
-    
     private lazy var humidityView = AdditionalView()
     private lazy var windView = AdditionalView()
     private lazy var pressureView = AdditionalView()
@@ -46,11 +43,6 @@ class WeatherViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .never
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
 }
 
 extension WeatherViewController {
